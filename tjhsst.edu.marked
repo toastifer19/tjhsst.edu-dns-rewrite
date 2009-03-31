@@ -1,0 +1,2545 @@
+; Default TTL
+$TTL 86400
+@			IN	SOA ns1.tjhsst.edu. hostmaster.tjhsst.edu. (
+
+					2009032500	; serial
+					3600		; Refresh
+					600			; Retry
+					1209600		; Expire
+					86400		; Reverse caching TTL
+				)
+;WARNING WARNING WARNING WARNING WARNING
+;WARNING WARNING WARNING WARNING WARNING
+;WARNING WARNING WARNING WARNING WARNING
+;   1. Check file out of RCS (co -l) _BEFORE_ making changes.
+;   2. Update the serial when making changes before running rndc reload.
+;   3. Check file in to RCS with comment and username after confirming changes work. (ci -u)
+;END WARNING.
+; EXTRA NOTE: Please use a standard tab size of 8 while editing, or don't edit indentation levels.
+
+;Nameservers
+			IN	NS	ns1.tjhsst.edu.
+			IN	NS	ns2.tjhsst.edu.
+			IN	NS	olympus.tjhsst.edu.
+			IN	NS	ns1-auth.sprintlink.net.
+			IN	NS	ns2-auth.sprintlink.net.
+			IN	NS	ns3-auth.sprintlink.net.
+			IN	NS	ns.uu.net.
+			IN	A	198.38.16.47
+			IN	AAAA	2001:468:cc0::c6ff:fe26:102f
+			IN	MX	10 franklin.tjhsst.edu.
+			IN	MX	20 mail-bkup.tjhsst.edu.
+			IN	TXT	"v=spf1 mx ~all"
+;Netblocks
+$GENERATE	16-31	net-tjhsst-$	A	198.38.$.0
+$GENERATE	16-31	0.$.38.198.ip4	PTR	net-tjhsst-$
+net-tjhsst-174			IN	A	192.65.174.0
+0.174.65.192.ip4		IN	PTR	net-tjhsst-174
+netv6-tjhsst-2001-0468-0cc0	IN	AAAA	2001:0468:0cc0::
+netv6-tjhsst-2001-468-cc0	IN	CNAME	netv6-tjhsst-2001-0468-0cc0
+;
+;
+; Network Backbone
+;	What should go here:
+;		Any network equipment we need access to.
+;\
+!!hesiod				IN	NS	ns1.tjhsst.edu.
+!!hesiod				IN	NS	ns2.tjhsst.edu.
+!!hesiod				IN	NS	olympus.tjhsst.edu.
+local				IN	NS	ns1.tjhsst.edu.
+local				IN	NS	ns2.tjhsst.edu.
+core0.csl			IN	CNAME	gateway.csl
+core0				IN	CNAME	gateway.csl
+TJHSST-4500MSL 			IN 	CNAME	gateway.csl
+gateway				IN	CNAME	gateway.csl
+gateway.csl			IN	A	198.38.16.254
+254.16.38.198.ip4		IN	PTR	gateway.csl
+core1.csl			IN	A	198.38.16.234
+core1				IN	CNAME	core1.csl
+234.16.38.198.ip4		IN	PTR	core1.csl
+core2.csl			IN	A	198.38.16.235
+core2				IN	CNAME	core2.csl
+235.16.38.198.ip4		IN	PTR	core2.csl
+;DONT EVER TOUCH THESE.
+csl-lan-ge			IN	A	192.168.2.1
+lan-csl-ge			IN	A	192.168.2.2
+lan-uunet-gw-e			IN	A	192.168.1.1
+uunet-gw-lan-e			IN	A	192.168.1.2
+moon-fcps.sun			IN	A	151.188.42.220
+
+seymour.csl    IN A  198.38.16.6
+seymour        IN CNAME seymour.csl
+6.16.38.198.ip4   IN PTR      seymour.csl
+cray        IN CNAME seymour
+
+scadmin.csl    IN A  198.38.16.7
+scadmin        IN CNAME scadmin.csl
+7.16.38.198.ip4   IN PTR      scadmin.csl
+
+!!console.csl    IN A  198.38.23.51
+!!console        IN CNAME console.csl
+!!51.23.38.198.ip4  IN PTR   console.csl
+
+!!sysmonitor.csl    IN A  198.38.23.52
+!!sysmonitor        IN CNAME sysmonitor.csl
+!!52.23.38.198.ip4  IN PTR   sysmonitor.csl
+
+;53 is taken by moon
+
+!!dellfibre.csl	IN A		198.38.23.54
+!!dellfibre	IN CNAME	dellfibre.csl
+!!54.23.38.198.ip4	IN PTR		dellfibre.csl
+
+adelie.csl     IN A  198.38.17.5
+adelie         IN CNAME adelie.csl
+5.17.38.198.ip4      IN PTR      adelie.csl
+
+adelie-1.csl      IN A  198.38.17.6
+adelie-1    IN CNAME adelie-1.csl
+6.17.38.198.ip4      IN PTR      adelie-1.csl
+
+rockhopper.csl    IN A  198.38.17.7
+rockhopper        IN CNAME rockhopper.csl
+7.17.38.198.ip4      IN PTR      rockhopper.csl
+
+??Debatably needed due to use of bonding
+??rockhopper-1.csl  IN A  198.38.17.8
+??rockhopper-1      IN CNAME rockhopper-1.csl
+??8.17.38.198.ip4      IN PTR      rockhopper-1.csl
+
+!!rockhopper-2.csl  IN A  198.38.17.9
+!!rockhopper-2      IN CNAME rockhopper-2.csl
+!!9.17.38.198.ip4      IN PTR      rockhopper-2.csl
+
+!!rockhopper-3.csl	IN	A	198.38.17.10
+!!rockhopper-3		IN	CNAME	rockhopper-3.csl
+!!10.17.38.198.ip4	IN	PTR		rockhopper-3.csl
+
+rockhopper-ilo.csl	IN	A	198.38.23.26
+rockhopper-ilo		IN	CNAME	rockhopper-ilo.csl
+26.23.38.198.ip4	IN	PTR		rockhopper-ilo.csl
+
+king.csl		IN	A	198.38.17.11
+king			IN	CNAME	king.csl
+11.17.38.198.ip4	IN	PTR		king.csl
+
+king-1.csl		IN	A	198.38.17.12
+king-1			IN	CNAME	king-1.csl
+12.17.38.198.ip4	IN	PTR		king-1.csl
+
+king-2.csl		IN	A	198.38.17.13
+king-2			IN	CNAME	king-2.csl
+13.17.38.198.ip4	IN	PTR		king-2.csl
+
+!!planck.csl		IN	CNAME	imageserver.csl
+!!planck			IN	CNAME	imageserver.csl
+
+emperor.csl		IN	A	198.38.17.14
+emperor			IN	CNAME	emperor.csl
+14.17.38.198.ip4	IN	PTR	emperor.csl
+
+emperor-1.csl		IN	A	198.38.17.15
+emporor-1			IN	CNAME	emperor-1.csl
+15.17.38.198.ip4	IN	PTR	emperor-1.csl
+
+emperor-2.csl		IN	A	198.38.17.16
+emporor-2			IN	CNAME	emperor-2.csl
+16.17.38.198.ip4	IN	PTR	emperor-2.csl
+
+!!humboldt.csl			IN	A	198.38.17.17
+!!humboldt		IN	CNAME	humboldt.csl
+!!17.17.38.198.ip4	IN	PTR	humboldt.csl
+
+!!humboldt-1.csl			IN	A	198.38.17.18
+!!humboldt-1		IN	CNAME	humboldt-1.csl
+!!18.17.38.198.ip4	IN	PTR	humboldt-1.csl
+
+!!macaroni.csl		IN	A	198.38.17.19
+!!macaroni			IN	CNAME macaroni.csl
+!!19.17.38.198.ip4	IN	PTR	macaroni.csl
+
+!!macaroni-1.csl		IN	A	198.38.17.20
+!!macaroni-1			IN	CNAME macaroni-1.csl
+!!20.17.38.198.ip4	IN	PTR	macaroni-1.csl
+
+robustus.csl		IN 	A	198.38.17.21
+robustus			IN	CNAME robustus.csl
+21.17.38.198.ip4	IN	PTR	robustus.csl
+
+robustus-1.csl		IN 	A	198.38.17.22
+robustus-1			IN	CNAME robustus-1.csl
+22.17.38.198.ip4	IN	PTR	robustus-1.csl
+
+robustus-2.csl		IN 	A	198.38.17.23
+robustus-2			IN	CNAME robustus-2.csl
+23.17.38.198.ip4	IN	PTR	robustus-2.csl
+
+!!mathematica-lm		IN	CNAME	apollo
+
+apollo.sun		IN	A		198.38.17.24
+			IN AAAA	2001:468:cc0:0:203:baff:fe11:2ec0
+apollo				IN	CNAME	apollo.sun
+24.17.38.198.ip4	IN	PTR		apollo.sun
+
+apollo-1.sun		IN	A		198.38.17.25
+apollo-1			IN	CNAME	apollo-1.sun
+25.17.38.198.ip4	IN	PTR		apollo-1.sun
+
+apollo-2.sun		IN	A		198.38.17.26
+apollo-2			IN	CNAME	apollo-2.sun
+26.17.38.198.ip4	IN	PTR		apollo-2.sun
+
+magellanic.csl		IN	A	198.38.17.38
+magellanic			IN	CNAME	magellanic.csl
+mage.csl			IN	CNAME	magellanic.csl
+mage				IN	CNAME	magellanic.csl
+38.17.38.198.ip4	IN	PTR		magellanic.csl
+
+??Debatably needed due to bonding
+??magellanic-1.csl	IN	A	198.38.17.39
+??magellanic-1		IN	CNAME	magellanic-1.csl
+??mage-1.csl			IN	CNAME	magellanic-1.csl
+??mage-1				IN	CNAME	magellanic-1.csl
+??39.17.38.198.ip4	IN	PTR		magellanic-1.csl
+
+magellanic-ilo.csl	IN	A	198.38.23.27
+magellanic-ilo		IN	CNAME	magellanic-ilo.csl
+mage-ilo.csl		IN	CNAME	magellanic-ilo.csl
+mage-ilo			IN	CNAME	magellanic-ilo.csl
+27.23.38.198.ip4	IN	PTR		magellanic-ilo.csl
+
+royal.csl			IN	A	198.38.17.40
+royal				IN	CNAME	royal.csl
+domination				IN	CNAME	royal.csl
+40.17.38.198.ip4	IN	PTR	royal.csl
+
+??Debatably needed due to bonding
+??royal-1.csl			IN	A	198.38.17.41
+??royal-1				IN	CNAME	royal-1.csl
+??41.17.38.198.ip4	IN	PTR	royal-1.csl
+
+royal-ilo.csl		IN	A	198.38.23.28
+royal-ilo			IN	CNAME	royal-ilo.csl
+28.23.38.198.ip4	IN	PTR	royal-ilo.csl
+
+fiordland.csl		IN	A	198.38.17.42
+fjordland.csl		IN	CNAME	fiordland.csl
+fiordland			IN	CNAME	fiordland.csl
+fjord.csl			IN	CNAME	fiordland.csl
+fiord.csl			IN	CNAME	fiordland.csl
+fjordland			IN	CNAME	fiordland.csl
+fjord				IN	CNAME	fiordland.csl
+fiord				IN	CNAME	fiordland.csl
+42.17.38.198.ip4	IN	PTR	fiordland.csl
+
+fiordland-1.csl		IN	A	198.38.17.43
+fjordland-1.csl		IN	CNAME	fiordland-1.csl
+fjord-1.csl			IN	CNAME	fiordland-1.csl
+fiord-1.csl			IN	CNAME	fiordland-1.csl
+fiordland-1			IN	CNAME	fiordland-1.csl
+fjordland-1			IN	CNAME	fiordland-1.csl
+fjord-1				IN	CNAME	fiordland-1.csl
+fiord-1				IN	CNAME	fiordland-1.csl
+43.17.38.198.ip4	IN	PTR	fiordland-1.csl
+
+fiordland-ilo.csl	IN	A	198.38.23.29
+fjordland-ilo.csl	IN	CNAME	fiordland-ilo.csl
+fjord-ilo.csl		IN	CNAME	fiordland-ilo.csl
+fiord-ilo.csl		IN	CNAME	fiordland-ilo.csl
+fiordland-ilo		IN	CNAME	fiordland-ilo.csl
+fjordland-ilo		IN	CNAME	fiordland-ilo.csl
+fjord-ilo			IN	CNAME	fiordland-ilo.csl
+fiord-ilo			IN	CNAME	fiordland-ilo.csl
+29.23.38.198.ip4	IN	PTR	fiordland-ilo.csl
+
+shakuru.sun		IN	A	198.38.17.49
+			IN	AAAA	2001:468:cc0:0:2e0:7dff:fef3:65ff
+??Is this alias still used?
+??console.sun		IN	CNAME	shakuru.sun
+shakuru			IN	CNAME	shakuru.sun
+49.17.38.198.ip4	IN	PTR	shakuru.sun
+
+agni.sun		IN	A	198.38.17.50
+			IN	AAAA	2001:468:cc0:0:214:4fff:fec3:391c
+agni			IN	CNAME	agni.sun
+50.17.38.198.ip4	IN	PTR	agni.sun
+
+copernicus.sun		IN	A	198.38.17.51
+			IN	AAAA	2001:468:cc0:0:214:4fff:fec3:38de
+copernicus		IN	CNAME	copernicus.sun
+51.17.38.198.ip4	IN	PTR	copernicus.sun
+
+kepler.sun		IN	A	198.38.17.52
+			IN	AAAA	2001:468:cc0:0:214:4fff:feb0:0df0
+kepler			IN	CNAME	kepler.sun
+52.17.38.198.ip4	IN	PTR	kepler.sun
+
+galileo.sun		IN	A	198.38.17.53
+			IN	AAAA	2001:468:cc0:0:214:4fff:fea1:ae74
+galileo			IN	CNAME	galileo.sun
+53.17.38.198.ip4	IN	PTR	galileo.sun
+
+moon.sun		IN	A	198.38.23.53
+?? any reason not to have?			;IN	AAAA	2001:468:cc0:0:214:4fff:feb0:b6ca
+moon			IN	CNAME	moon.sun
+53.23.38.198.ip4	IN	PTR	moon.sun
+
+snares.csl		IN	A	198.38.17.54
+?? this should be enabled			;IN	AAAA	2001:468:cc0:0:218:feff:fe79:44b8
+snares			IN	CNAME	snares.csl
+54.17.38.198.ip4	IN	PTR	snares.csl
+
+bottom.csl		IN	A	198.38.17.55
+bottom			IN	CNAME	bottom.csl
+!!These are no longer used
+!!boxcat			IN	CNAME	bottom.csl
+!!soccercat		IN	CNAME	bottom.csl
+55.17.38.198.ip4	IN	PTR	bottom.csl
+
+??May be obselete due to bonding
+??bottom-1.csl		IN	A	198.38.17.56
+??bottom-1		IN	CNAME	bottom-1.csl
+??56.17.38.198.ip4	IN	PTR	bottom-1.csl
+
+zenodotus.csl		IN	A	198.38.17.58
+zenodotus		IN	CNAME	zenodotus.csl
+zeno.csl		IN	CNAME	zenodotus.csl
+zeno			IN	CNAME	zenodotus.csl
+58.17.38.198.ip4	IN	PTR	zenodotus.csl
+
+centauri.sun		IN	A	198.38.17.59
+			IN	AAAA	2001:468:cc0:0:21e:68ff:fe04:5518
+centauri		IN	CNAME	centauri.sun
+59.17.38.198.ip4	IN	PTR	centauri.sun
+
+deneb.sun		IN	A	198.38.17.60
+			IN	AAAA	2001:468:cc0:0:21e:68ff:fe04:5d64
+deneb			IN	CNAME	deneb.sun
+60.17.38.198.ip4	IN	PTR	deneb.sun
+
+sirius.sun		IN	A	198.38.17.61
+			IN	AAAA	2001:468:cc0:0:21e:68ff:fe04:9624
+sirius			IN	CNAME	sirius.sun
+61.17.38.198.ip4	IN	PTR	sirius.sun
+
+altair.sun		IN	A	198.38.17.62
+			IN	AAAA	2001:468:cc0:0:21e:68ff:fe04:57b8
+altair			IN	CNAME	altair.sun
+62.17.38.198.ip4	IN	PTR	altair.sun
+
+vega.sun		IN	A	198.38.17.63
+			IN	AAAA	2001:468:cc0:0:21e:68ff:fe04:9348
+vega			IN	CNAME	vega.sun
+63.17.38.198.ip4	IN	PTR	vega.sun
+
+betelgeuse.sun		IN	A	198.38.17.64
+			IN	AAAA	2001:468:cc0:0:21e:68ff:fe04:9568
+betelgeuse		IN	CNAME	betelgeuse.sun
+betel.sun		IN	CNAME	betelgeuse.sun
+betel			IN	CNAME	betelgeuse.sun
+64.17.38.198.ip4	IN	PTR	betelgeuse.sun
+
+dulles.sun		IN	A	198.38.17.65
+?? any reason not to have?;			IN	AAAA	2001:468:cc0:0:214:4fff:feb1:220e
+dulles			IN	CNAME	dulles.sun
+iad.sun			IN	CNAME	dulles.sun
+iad			IN	CNAME	dulles.sun
+65.17.38.198.ip4	IN	PTR	dulles.sun
+
+seatac.sun		IN	A	198.38.17.66
+?? any reason not to have?;			IN	AAAA	2001:468:cc0:0:214:4fff:feb1:8dc0
+seatac			IN	CNAME	seatac.sun
+sea.sun			IN	CNAME	seatac.sun
+sea			IN	CNAME	seatac.sun
+66.17.38.198.ip4	IN	PTR	seatac.sun
+
+ohare.sun		IN	A	198.38.17.67
+			IN	AAAA	2001:468:cc0:0:214:4fff:fe97:4492
+ohare			IN	CNAME	ohare.sun
+67.17.38.198.ip4	IN	PTR	ohare.sun
+
+logan.sun		IN	A	198.38.17.68
+			IN	AAAA	2001:468:cc0:0:214:4fff:fe98:455e
+logan			IN	CNAME	logan.sun
+68.17.38.198.ip4	IN	PTR	logan.sun
+
+arcturus.sun		IN	A	198.38.17.69
+			IN	AAAA	2001:468:cc0:0:214:4fff:fe80:b226
+arcturus		IN	CNAME	arcturus.sun
+69.17.38.198.ip4	IN	PTR	arcturus.sun
+
+ra.sun			IN	A	198.38.17.70
+			IN	AAAA	2001:468:cc0:0:214:4fff:fef9:cf20
+ra			IN	CNAME	ra.sun
+70.17.38.198.ip4	IN	PTR	ra.sun
+
+constellation.sun	IN	A	198.38.17.72
+constellation		IN	CNAME	constellation.sun
+72.17.38.198.ip4	IN	PTR	constellation.sun
+
+sovereign.csl		IN	A	198.38.17.71
+sovereign		IN	CNAME	sovereign.csl
+71.17.38.198.ip4	IN	PTR	sovereign.csl
+
+!!awesome.sun		IN	A	198.38.17.74
+!!			IN	AAAA	2001:468:cc0:0:214:4fff:fef2:8fbc
+!!awesome			IN	CNAME	awesome.sun
+!!74.17.38.198.ip4	IN	PTR	awesome.sun
+
+!!chainsaw.csl		IN	A	198.38.17.73
+!!73.17.38.198.ip4	IN	PTR	chainsaw.csl
+
+??Is this still used?
+??crowbar.csl		IN	A	198.38.17.75
+??75.17.38.198.ip4	IN	PTR	crowbar.csl
+
+bache			IN	A	198.38.17.76
+76.17.38.198.ip4	IN	PTR	bache
+
+spinner.csl		IN	A	198.38.17.77
+spinner			IN	CNAME	spinner.csl
+77.17.38.198.ip4	IN	PTR	spinner.csl
+
+kdc1-ng.csl		IN 	A 	198.38.17.250
+kdc1-ng			IN	CNAME	kdc1-ng.csl
+250.17.38.198.ip4	IN	PTR	kdc1-ng.csl
+
+kdc2-ng.csl		IN 	A 	198.38.17.251
+kdc2-ng			IN	CNAME	kdc2-ng.csl
+251.17.38.198.ip4	IN	PTR	kdc2-ng.csl
+
+;DO NOT FIND OR JEFF ARNOLD WILL TOUCH YOU
+vote			IN	CNAME	cis1
+*.vote			IN	CNAME	cis1
+
+cis			IN	CNAME	cis1
+*.cis			IN	CNAME	cis1
+*.cis1			IN	CNAME	cis1
+cis1				IN	A	198.38.16.105
+105.16.38.198.ip4	IN	PTR	cis.cappies.com.
+
+??WAP? is this used?
+expanse.csl			IN	A	198.38.16.200
+expanse				IN	CNAME	expanse.csl
+
+franklin		IN	A	198.38.16.130
+			IN	TXT	"v=spf1 a -all"
+130.16.38.198.ip4	IN	PTR	franklin
+
+alexandria.csl		IN	A	198.38.23.11
+alexandria		IN	CNAME	alexandria.csl
+11.23.38.198.ip4	IN	PTR	alexandria.csl
+
+athens.csl		IN	A	198.38.23.12
+athens			IN	CNAME	athens.csl
+12.23.38.198.ip4	IN	PTR	athens.csl
+
+snares-ilo.csl		IN	A	198.38.23.30
+snares-ilo		IN	CNAME	snares-ilo.csl
+30.23.38.198.ip4	IN	PTR	snares-ilo.csl
+
+bottom-ilo.csl		IN	A	198.38.23.31
+bottom-ilo		IN	CNAME	bottom-ilo.csl
+31.23.38.198.ip4	IN	PTR	bottom-ilo.csl
+
+centauri-lom.sun	IN	A	198.38.23.32
+centauri-lom		IN	CNAME	centauri-lom.sun
+32.23.38.198.ip4	IN	PTR	centauri-lom.sun
+
+deneb-lom.sun		IN	A	198.38.23.33
+deneb-lom		IN	CNAME	deneb-lom.sun
+33.23.38.198.ip4	IN	PTR	deneb-lom.sun
+
+sirius-lom.sun		IN	A	198.38.23.34
+sirius-lom		IN	CNAME	sirius-lom.sun
+34.23.38.198.ip4	IN	PTR	sirius-lom.sun
+
+altair-lom.sun		IN	A	198.38.23.35
+altair-lom		IN	CNAME	altair-lom.sun
+35.23.38.198.ip4	IN	PTR	altair-lom.sun
+
+vega-lom.sun		IN	A	198.38.23.36
+vega-lom		IN	CNAME	vega-lom.sun
+36.23.38.198.ip4	IN	PTR	vega-lom.sun
+
+betelgeuse-lom.sun	IN	A	198.38.23.37
+betel-lom.sun		IN	CNAME	betelgeuse-lom.sun
+betelgeuse-lom		IN	CNAME	betelgeuse-lom.sun
+betel-lom		IN	CNAME	betelgeuse-lom.sun
+37.23.38.198.ip4	IN	PTR	betelgeuse-lom.sun
+
+dulles-lom.sun		IN	A	198.38.23.38
+dulles-lom		IN	CNAME	dulles-lom.sun
+iad-lom.sun		IN	CNAME	dulles-lom.sun
+iad-lom			IN	CNAME	dulles-lom.sun
+38.23.38.198.ip4	IN	PTR	dulles-lom.sun
+
+seatac-lom.sun		IN	A	198.38.23.39
+seatac-lom		IN	CNAME	seatac-lom.sun
+sea-lom.sun		IN	CNAME	seatac-lom.sun
+sea-lom			IN	CNAME	seatac-lom.sun
+39.23.38.198.ip4	IN	PTR	seatac-lom.sun
+
+ohare-lom.sun		IN	A	198.38.23.40
+ohare-lom		IN	CNAME	ohare-lom.sun
+40.23.38.198.ip4	IN	PTR	ohare-lom.sun
+
+logan-lom.sun		IN	A	198.38.23.41
+logan-lom		IN	CNAME	logan-lom.sun
+41.23.38.198.ip4	IN	PTR	logan-lom.sun
+
+moon-lom.sun		IN	A	198.38.23.42
+moon-lom		IN	CNAME	moon-lom.sun
+42.23.38.198.ip4	IN	PTR	moon-lom.sun
+
+arcturus-lom.sun	IN	A	198.38.23.43
+arcturus-lom		IN	CNAME	arcturus-lom.sun
+43.23.38.198.ip4	IN	PTR	arcturus-lom.sun
+
+enterprise-lom.sun	IN	A	198.38.23.47
+enterprise-lom		IN	CNAME	enterprise-lom.sun
+47.23.38.198.ip4	IN	PTR	enterprise-lom.sun
+
+!!awesome-lom.sun		IN	A	198.38.23.48
+!!awesome-lom		IN	CNAME	awesome-lom.sun
+!!48.23.38.198.ip4	IN	PTR	awesome-lom.sun
+
+meson-me.csl		IN	A	198.38.23.44
+meson-me		IN	CNAME	meson-me.csl
+44.23.38.198.ip4	IN	PTR	meson-me.csl
+
+baryon-me.csl		IN	A	198.38.23.45
+baryon-me		IN	CNAME	baryon-me.csl
+45.23.38.198.ip4	IN	PTR	baryon-me.csl
+
+boson-me.csl		IN	A	198.38.23.46
+boson-me		IN	CNAME	boson-me.csl
+46.23.38.198.ip4	IN	PTR	boson-me.csl
+
+; UPS card
+apcupsnet		IN	A	198.38.23.55
+55.23.38.198.ip4	IN	PTR	apcupsnet
+
+apcupsnet2		IN	A	198.38.23.56
+56.23.38.198.ip4	IN	PTR	apcupsnet2
+
+apcupsnet3		IN	A	198.38.23.57
+57.23.38.198.ip4	IN	PTR	apcupsnet3
+
+apcupsnet4		IN	A	198.38.23.58
+58.23.38.198.ip4	IN	PTR	apcupsnet4
+
+apcupsnet5		IN	A	198.38.23.59
+59.23.38.198.ip4	IN	PTR	apcupsnet5
+
+apcupsnet6		IN	A	198.38.23.60
+60.23.38.198.ip4	IN	PTR	apcupsnet6
+
+apcupsnet7		IN	A	198.38.23.61
+61.23.38.198.ip4	IN	PTR	apcupsnet7
+
+apcupsnet8		IN	A	198.38.23.62
+62.23.38.198		IN	PTR	apcupsnet8
+
+
+;Services
+;	What should go here:
+;		Any service that a server provides should have its *own* seperate dns entry and IP
+;		The IP should then be brought up on the server which hosts it in addition to thats
+;		Server's primary IP address
+;
+;	IPS: .16.1-.16.255
+;
+
+;ntp - .1-.5
+ntp			IN	CNAME	ntp1.csl
+ntp.csl			IN	CNAME	ntp1.csl
+
+ntp1.csl		IN	A	198.38.16.1
+ntp1			IN	CNAME ntp1.csl
+1.16.38.198.ip4		IN	PTR	ntp1.csl
+
+ntp2.csl		IN	A	198.38.16.2
+ntp2			IN	CNAME ntp2.csl
+2.16.38.198.ip4		IN	PTR	ntp2.csl
+
+
+??How many NTP servers do we want/need?
+??ntp3.csl		IN	A	198.38.16.3
+??ntp3			IN	CNAME ntp3.csl
+??3.16.38.198.ip4		IN	PTR	ntp3.csl
+??
+??ntp4.csl		IN	A	198.38.16.4
+??ntp4			IN	CNAME ntp4.csl
+??4.16.38.198.ip4		IN	PTR	ntp4.csl
+??
+??ntp5.csl		IN	A	198.38.16.5
+??ntp5			IN	CNAME ntp5.csl
+??5.16.38.198.ip4		IN	PTR	ntp5.csl
+
+??;cray - .6, .7 DO NOT ADD HERE!!!
+
+;ldap - .8-.15
+iodine-ldap		IN	A	198.38.16.8
+iodine-ldap.csl		IN	CNAME iodine-ldap
+8.16.38.198.ip4		IN	PTR	iodine-ldap
+
+ldap1.sun		IN	A	198.38.16.12
+			IN	AAAA	2001:468:cc0:0:214:4fff:fef9:dccb
+ldap1			IN	CNAME	ldap1.sun
+12.16.38.198.ip4	IN	PTR	ldap1.sun
+
+ldap2.sun		IN	A	198.38.16.13
+			IN	AAAA	2001:468:cc0:0:214:4fff:fefa:a215
+ldap2			IN	CNAME	ldap2.sun
+13.16.38.198.ip4	IN	PTR	ldap2.sun
+
+openldap.csl		IN	A	198.38.16.14
+??This should be enabled;			IN	AAAA	2001:468:cc0:0:214:4fff:fefb:8e7
+openldap		IN	CNAME	openldap.csl
+14.16.38.198.ip4	IN	PTR	openldap.csl
+
+; KRB - .16-.17
+kdc			IN  CNAME	kdc1.csl
+kdc.csl			IN  CNAME	kdc1.csl
+
+??Any reason for these to be in reverse order?
+??kdc2			IN	A	198.38.16.16
+??kdc2.csl		IN	CNAME kdc2
+??16.16.38.198.ip4	IN	PTR	kdc2
+!!nis				IN	CNAME	kdc2.csl nis?
+;NOT A MISTAKE ^^ OR BELOW.. LEAVE
+??kdc1			IN	A	198.38.16.17
+??kdc1.csl				IN	CNAME kdc1
+??17.16.38.198.ip4	IN	PTR	kdc1
+
+; OpenAFS .18-.25
+
+; .18 skipped for eventual DB master
+
+openafs1.csl			IN	A	198.38.16.19
+openafs1			IN	CNAME 	openafs1.csl
+19.16.38.198.ip4		IN	PTR	openafs1.csl
+; New AFS VMs
+haafs1.csl			IN	A	198.38.16.20
+haafs1				IN	CNAME	haafs1.csl
+20.16.38.198.ip4		IN	PTR	haafs1.csl
+haafs2.csl			IN	A	198.38.16.21
+haafs2				IN	CNAME	haafs2.csl
+21.16.38.198.ip4		IN	PTR	haafs2.csl
+openafs2.csl			IN	A	198.38.16.22
+openafs2			IN	CNAME	openafs2.csl
+22.16.38.198.ip4		IN	PTR	openafs2.csl
+
+; CUPS .26
+cups				IN  	CNAME	cups1.csl
+cups.csl			IN  	CNAME	cups1.csl
+print.csl			IN	CNAME	cups1.csl
+print				IN	CNAME	cups1.csl
+
+cups1.csl			IN	A	198.38.16.26
+cups1				IN	CNAME cups1.csl
+26.16.38.198.ip4		IN	PTR	cups1.csl
+
+
+??These PTR records should move back with their respective servers or be removed if no longer used
+??;TOUCH THIS YOU DIE
+??27.16.38.198.ip4	IN	PTR	magellanic
+??;DEATH
+??;DO NOT EVER USE .28,.27,.29 EVER EVER EVER EVER EVEVER ** **** ***** ****
+??;YOU TOUCH THIS YOU WILL KILL THE LAB
+??; ^^ LAB DEATH SWITCHES
+??;TOUCH THIS YOU DIE
+??28.16.38.198.ip4	IN	PTR	royal
+??;TOUCH THIS YOU DIE
+??29.16.38.198.ip4	IN	PTR	fiordland
+??;DONT KILL THE LAB THANKS MUCH ^^
+
+
+; LTSP .30-39
+??Should this be changed to point to ltsp2?
+??ltsp			IN  CNAME	ltsp1.csl
+??ltsp.csl		IN  CNAME	ltsp1.csl
+
+!!Decommissioned to long-term backup
+!!ltsp-boot.csl       IN  A   198.38.16.30
+!!ltsp-boot           IN  CNAME   ltsp-boot.csl
+!!30.16.38.198.ip4    IN  PTR ltsp-boot.csl
+
+ltsp1.csl			IN	A	198.38.16.31
+ltsp1				IN	CNAME ltsp1.csl
+31.16.38.198.ip4	IN	PTR	ltsp1.csl
+
+ltsp2.csl			IN	A 	198.38.16.32
+ltsp2				IN	CNAME	ltsp2.csl
+32.16.38.198.ip4	IN	PTR		ltsp2.csl
+
+
+; DNS .40 - .43
+ns				IN  CNAME ns1
+ns.csl				IN  CNAME ns1
+ns1				IN	A	198.38.16.40
+				IN	MX	1 franklin.tjhsst.edu.
+				IN	MX	2 mail-bkup.tjhsst.edu.
+				IN	AAAA	2001:468:cc0::c6ff:fe26:1028
+!!; for macaroni
+!!;					IN	AAAA	2001:468:cc0:0:230:48ff:fe21:19aa
+
+ns1.csl				IN  CNAME ns1	
+40.16.38.198.ip4	IN 	PTR ns1
+
+ns2					IN	A	198.38.16.41
+					IN	MX	1 franklin.tjhsst.edu.
+					IN	MX	2 mail-bkup.tjhsst.edu.
+					IN	AAAA	2001:468:cc0::c6ff:fe26:1029
+ns2.csl				IN  CNAME ns2
+41.16.38.198.ip4	IN 	PTR ns2
+
+; License .45
+mathlm				IN	CNAME	license.csl
+??matlab				IN	CNAME	fiordland
+license.csl			IN	A	198.38.16.45
+license				IN	CNAME	license.csl
+45.16.38.198.ip4		IN	PTR	license.csl
+
+; TJForge (if it comes back) .46
+
+; .41 - .60 Do Not Touch
+kerberos		IN	A	198.38.16.52
+52.16.38.198.ip4	IN PTR kerberos
+syslog			IN	A	198.38.16.48
+48.16.38.198.ip4	IN PTR syslog
+??admin			IN	A	198.38.16.50
+??50.16.38.198.ip4	IN PTR admin
+sun				IN	A	198.38.16.58
+58.16.38.198.ip4	IN PTR sun
+ldap-sun		IN	A	198.38.16.59
+59.16.38.198.ip4	IN PTR ldap-sun
+; Mysql .60-69
+
+
+mysql				IN  CNAME	mysql1.csl
+mysql.csl			IN  CNAME	mysql1.csl
+
+??Clean up mysql IPs!! too much to comment
+; MySQL cluster
+mysql-ndb1		IN	CNAME	magellanic.tjhsst.edu.
+mysql-ndb2		IN	CNAME	royal.tjhsst.edu.
+mysql-ndb3		IN	CNAME	emperor.tjhsst.edu.
+mysql1.csl			IN	A	198.38.16.60
+mysql1				IN	CNAME mysql1.csl
+60.16.38.198.ip4	IN	PTR	mysql1.csl
+
+mysql2.csl			IN	A	198.38.16.61
+mysql2				IN	CNAME mysql2.csl
+61.16.38.198.ip4	IN	PTR	mysql2.csl
+
+mysql3.csl			IN	A	198.38.16.62
+mysql3				IN	CNAME mysql3.csl
+62.16.38.198.ip4	IN	PTR	mysql3.csl
+
+mysql4.csl			IN	A	198.38.16.63
+mysql4				IN	CNAME mysql4.csl
+63.16.38.198.ip4	IN	PTR	mysql4.csl
+
+mysql5.csl			IN	A	198.38.16.64
+mysql5				IN	CNAME mysql5.csl
+64.16.38.198.ip4	IN	PTR	mysql5.csl
+
+mysql6.csl			IN	A	198.38.16.65
+mysql6				IN	CNAME mysql6.csl
+65.16.38.198.ip4	IN	PTR	mysql6.csl
+
+mysql7.csl			IN	A	198.38.16.66
+mysql7				IN	CNAME mysql7.csl
+66.16.38.198.ip4	IN	PTR	mysql7.csl
+
+mysql8.csl			IN	A	198.38.16.67
+mysql8				IN	CNAME mysql8.csl
+67.16.38.198.ip4	IN	PTR	mysql8.csl
+
+mysql9.csl			IN	A	198.38.16.68
+mysql9				IN	CNAME mysql9.csl
+68.16.38.198.ip4	IN	PTR	mysql9.csl
+
+mysql10.csl			IN	A	198.38.16.69
+mysql10				IN	CNAME mysql10.csl
+69.16.38.198.ip4	IN	PTR	mysql10.csl
+
+klaxon.sun		IN	A	198.38.16.70
+klaxon			IN	CNAME	klaxon.sun
+70.16.38.198.ip4	IN	PTR	klaxon.sun
+
+; PostgreSQL .70-.79
+;postgresql			IN  CNAME postgresql1.csl
+;postgresql.csl		IN  CNAME postgresql1.csl
+
+
+; Web .47 and .80-89 
+47.16.38.198.ip4	IN	PTR	www
+www			IN	A	198.38.16.47
+;			IN	AAAA	2001:468:cc0::c6ff:fe26:102f
+;Commented for backup
+rit			IN	A	129.21.205.119
+2006			IN	CNAME	www
+2007			IN	CNAME	www
+2008			IN	CNAME	www
+2009			IN	CNAME	www
+2010			IN	CNAME	www
+2011			IN	CNAME	www
+2012			IN	CNAME	www
+;^^ next centry worth of webdocs? ;)
+test			IN	CNAME	www
+information		IN	CNAME	www
+portfolios		IN	CNAME	www
+academics		IN	CNAME	www
+sct				IN	CNAME	www
+search			IN	CNAME	www
+sitemap			IN	CNAME	www
+leadership		IN	CNAME	www
+publications	IN	CNAME	www
+activities		IN	CNAME	www
+sports			IN	CNAME	www
+arts			IN	CNAME	www
+portal			IN	CNAME	www
+media			IN	CNAME	www
+users			IN	CNAME	www
+unix			IN	CNAME	www
+teachers		IN	CNAME	www
+webdav			IN	CNAME	www
+phpmyadmin		IN	CNAME	www
+kbase			IN	CNAME	www
+help			IN	CNAME	www
+craydoc			IN	CNAME	www
+craybatch		IN	CNAME	www
+oldsite			IN	CNAME	www
+alumni			IN	CNAME	www.tjhsstalumni.org.
+www.leadership	IN	CNAME	www
+jtrader			IN	CNAME	www
+projects		IN	CNAME	www
+newestsite		IN	CNAME	www
+web2			IN	CNAME	www
+;web3			IN	CNAME	www	;sgodofsky
+;web4			IN	CNAME	www	;dyllad
+
+??Not sure if this will be needed/used
+??www-lenny.csl		IN	A	198.38.16.49
+??www-lenny		IN	CNAME	www-lenny.csl
+??49.16.38.198.ip4	IN	PTR	www-lenny.csl
+
+fusion.csl		IN	A	198.38.16.53
+fusion			IN	CNAME	fusion.csl
+53.16.38.198.ip4	IN	PTR	fusion.csl
+
+terra.csl		IN	A	198.38.16.54
+terra			IN	CNAME	terra.csl
+54.16.38.198.ip4	IN	PTR	terra.csl
+
+??I believe this VM has been decommisssioned to long-term backup
+??tap			IN	A	198.38.16.80
+??tjappublishings		IN	CNAME	tap
+??80.16.38.198.ip4	IN	PTR	tap
+
+; Iodine .90-.99
+iodine			IN	A	198.38.16.90
+			IN	AAAA 	2001:468:cc0::c6ff:fe26:105a
+iodine.csl				IN	CNAME iodine
+intranet				IN	CNAME iodine.csl
+??mysql-mgm		IN	CNAME idoine
+90.16.38.198.ip4	IN	PTR	iodine
+
+??iodine2			IN	A	198.38.16.91
+??iodine2.csl		IN	A	198.38.16.91
+??91.16.38.198.ip4  IN PTR   iodine2
+
+??iodine-lenny		IN	A	198.38.16.92
+??iodine-lenny.csl	IN	CNAME	iodine-lenny
+??92.16.38.198.ip4	IN	PTR	iodine-lenny
+
+; Weather .100-.101
+weather.csl			IN  A	198.38.16.100
+weather				IN  CNAME weather.csl
+100.16.38.198.ip4	IN  PTR	weather.csl
+
+??; Finger .102
+??finger.csl			IN  A	198.38.16.102
+??finger 				IN  CNAME finger.csl
+??102.16.38.198.ip4	IN	PTR	finger.csl
+
+??Not sure what this does
+??;isoi .103
+??isoi			IN	A	198.38.16.103
+??			IN	MX	1 franklin.tjhsst.edu.
+??			IN	MX	2 mail-bkup.tjhsst.edu.
+; Mail .130-.140
+
+??;mail				IN	A	198.38.16.130
+??;					IN	TXT	"v=spf1 a -all"
+??;130.16.38.198.ip4	IN	PTR	mail
+
+lists				IN	A	198.38.16.131
+131.16.38.198.ip4	IN	PTR	lists
+
+mail-bkup			IN	A	198.38.16.132
+				IN	TXT	"v=spf1 a -all"
+mail				IN	A	198.38.16.132
+				IN	TXT	"v=spf1 a -all"
+132.16.38.198.ip4	IN	PTR	mail
+
+??mail-new			IN	A	198.38.16.133
+??					IN	TXT	"v=spf1 a -all"
+??133.16.38.198.ip4		IN	PTR	mail-new
+
+
+??; Image .141-.145
+
+??Is this still used?
+??image.csl			IN	A	198.38.16.141
+??image				IN	CNAME	image.csl
+??141.16.38.198.ip4	IN	PTR	image.csl
+
+imageserver.csl		IN	A	198.38.16.142
+imageserver			IN	CNAME	imageserver.csl
+142.16.38.198.ip4	IN	PTR	imageserver.csl
+
+; SGD .146-.150
+sgd.sun				IN	A	198.38.16.146
+sgd					IN	CNAME	sgd.sun
+146.16.38.198.ip4	IN	PTR	sgd.sun
+
+; VPN .151-.155
+??Is this used, if so one of these should probably be a CNAME
+??vpn.csl				IN	A	198.38.16.151
+??vpn   				IN	A	198.38.16.151
+??151.16.38.198.ip4	IN	PTR	vpn.csl
+
+>>Renumber VPNs once this is done?
+openvpn.csl			IN	A	198.38.16.152
+openvpn				IN	CNAME openvpn.csl
+vpn2.csl			IN	CNAME openvpn.csl
+vpn2				IN	CNAME openvpn.csl
+152.16.38.198.ip4	IN	PTR	openvpn.csl
+
+??Does not exist I don't think
+??openvpn2.csl			IN	A	198.38.16.153
+??vpn3.csl			IN	CNAME openvpn2.csl
+??vpn3				IN	CNAME openvpn2.csl
+??openvpn2				IN	CNAME openvpn2.csl
+??153.16.38.198.ip4	IN	PTR	openvpn2.csl
+
+ipsecvpn.csl		IN	A	198.38.16.154
+vpn4.csl		IN	CNAME	ipsecvpn.csl
+vpn4			IN	CNAME	ipsecvpn.csl
+154.16.38.198.ip4	IN	PTR	ipsecvpn.csl
+
+??Is this actually planned?
+??ipsecvpn1.sun		IN	A	198.38.16.155
+??155.16.38.198.ip4	IN	PTR	ipsecvpn1.sun
+
+; Mirror .156-.160
+mirror.csl			IN	A	198.38.16.156
+mirror				IN	CNAME	mirror.csl
+156.16.38.198.ip4	IN	PTR	mirror.csl
+
+; Remote/Localremote .161, .162
+??localremote?
+??localremote.csl		IN	CNAME	remote.csl
+??localremote			IN	CNAME	remote.csl
+remote.csl			IN	A	198.38.16.161
+remote				IN	CNAME	remote.csl
+161.16.38.198.ip4	IN	PTR	remote.csl
+
+??oldremote is not currently used, do we want to keep it?
+??; Oldremote .163-.164
+??;oldremote.csl		IN	A	198.38.16.163
+??;oldremote			IN	CNAME	oldremote.csl
+??;163.16.38.198.ip4	IN	PTR	oldremote.csl
+??oldremote		IN	CNAME	remote.csl
+??oldremote.csl		IN	CNAME	remote.csl
+
+??; NFS .165-.170
+??nfs.csl				IN	A	198.38.16.165
+??nfs					IN	CNAME	nfs.csl
+??165.16.38.198.ip4	IN	PTR	nfs.csl
+
+!!This isn't actually used and Zeno has been repurposed
+!!nfs-admin-home.csl		IN	CNAME	zenodotus.csl
+!!nfs-admin-home			IN	CNAME	zenodotus.csl
+
+; Student .171-.180
+whiteboard.csl			IN	A	198.38.16.171
+whiteboard			IN	CNAME	whiteboard.csl
+171.16.38.198.ip4			IN	PTR	whiteboard.csl
+
+iota2.csl			IN	A	198.38.16.172
+iota2				IN	CNAME	iota2.csl
+172.16.38.198.ip4		IN	PTR	iota2.csl
+
+!!tjtalk.csl			IN	A	198.38.16.173
+!!tjtalk				IN	CNAME	tjtalk.csl
+!!173.16.38.198.ip4		IN	PTR	tjtalk.csl
+!!
+!!nhs.csl				IN	A	198.38.16.174
+!!nhs				IN	CNAME	nhs.csl
+!!174.16.38.198.ip4		IN	PTR	nhs.csl
+!!
+!!lists-new.csl			IN	A	198.38.16.175
+!!lists-new			IN	CNAME	lists-new.csl
+!!175.16.38.198.ip4		IN	PTR	lists-new.csl
+
+saaa				IN	A	198.38.16.81
+81.16.38.198.ip4		IN	PTR	saaa
+
+; bugs .181
+bugs.csl			IN	A	198.38.16.181
+bugs				IN	CNAME	bugs.csl
+181.16.38.198.ip4	IN	PTR	bugs.csl
+
+; cas .182
+cas.csl				IN	A	198.38.16.182
+cas				IN	CNAME	cas.csl
+182.16.38.198.ip4		IN	PTR	cas.csl
+
+!!Decommissioned
+!!gobot.csl			IN	A	198.38.16.183
+!!gobot						IN CNAME gobot.csl
+!!183.16.38.198.ip4 IN	PTR	gobot.csl
+
+!!No plans to implement
+!!;scripts servers
+!!scripts-backup.csl		IN	A	198.38.16.184
+!!scripts-backup			IN	CNAME	scripts-backup.csl
+!!184.16.38.198.ip4		IN	PTR	scripts-backup.csl
+!!
+!!scripts.csl			IN	A	198.38.16.185
+!!scripts				IN	CNAME	scripts.csl
+!!185.16.38.198.ip4		IN	PTR	scripts.csl
+
+;Sun Ray main FOG round-robin lookup addresses
+sunray-servers.sun	IN	A	198.38.17.59
+sunray-servers.sun	IN	A	198.38.17.60
+sunray-servers.sun	IN	A	198.38.17.61
+
+csl.tjhsst.edu.	7200 IN	AFSDB	1	haafs1.csl.tjhsst.edu.
+csl.tjhsst.edu.	7200 IN	AFSDB	1	haafs2.csl.tjhsst.edu.
+csl.tjhsst.edu.	7200 IN	AFSDB	1	fiordland.csl.tjhsst.edu.
+
+_kerberos               TXT       "CSL.TJHSST.EDU"
+_kerberos._tcp          SRV       0 0 88 kdc1
+                        SRV       0 0 88 kdc2
+_kerberos-master._tcp   SRV       0 0 88 kdc1
+_kerberos-adm._tcp      SRV       0 0 749 kdc1
+_kpasswd._udp           SRV       0 0 464 kdc1
+_kerberos.csl               TXT       "CSL.TJHSST.EDU"
+_kerberos._tcp.csl          SRV       0 0 88 kdc1
+         		            SRV       0 0 88 kdc2
+_kerberos-master._tcp.csl   SRV       0 0 88 kdc1
+_kerberos-adm._tcp.csl      SRV       0 0 749 kdc1
+_kpasswd._udp.csl           SRV       0 0 464 kdc1
+
+; workstations
+!!This series of workstations has been decommissioned and returned to Mr. Phillips
+agamemnon.csl		IN  A		198.38.18.1
+agamemnon		IN  CNAME	agamemnon.csl
+1.18.38.198.ip4		IN  PTR		agamemnon.csl
+
+antigone.csl		IN  A		198.38.18.2
+antigone		IN  CNAME	antigone.csl
+2.18.38.198.ip4		IN  PTR		antigone.csl
+
+beck.csl		IN  A		198.38.18.3
+beck			IN  CNAME	beck.csl
+3.18.38.198.ip4		IN  PTR		beck.csl
+
+beowulf.csl		IN  A		198.38.18.4
+beowulf			IN  CNAME	beowulf.csl
+4.18.38.198.ip4		IN  PTR		beowulf.csl
+
+berry.csl		IN  A		198.38.18.5
+berry			IN  CNAME	berry.csl
+5.18.38.198.ip4		IN  PTR		berry.csl
+
+brutus.csl		IN  A		198.38.18.6
+brutus			IN  CNAME	brutus.csl
+6.18.38.198.ip4		IN  PTR		brutus.csl
+
+dylan.csl		IN  A		198.38.18.7
+dylan			IN  CNAME	dylan.csl
+7.18.38.198.ip4		IN  PTR		dylan.csl
+
+fripp.csl		IN  A		198.38.18.8
+fripp			IN  CNAME	fripp.csl
+8.18.38.198.ip4		IN  PTR		fripp.csl
+
+gilgamesh.csl		IN  A		198.38.18.9
+gilgamesh		IN  CNAME	gilgamesh.csl
+9.18.38.198.ip4		IN  PTR		gilgamesh.csl
+
+hamlet.csl		IN  A		198.38.18.10
+hamlet			IN  CNAME	hamlet.csl
+10.18.38.198.ip4	IN  PTR		hamlet.csl
+
+harrison.csl		IN  A		198.38.18.11
+harrison		IN  CNAME	harrison.csl
+11.18.38.198.ip4	IN  PTR		harrison.csl
+
+hendrix.csl		IN  A		198.38.18.12
+hendrix			IN  CNAME	hendrix.csl
+12.18.38.198.ip4	IN  PTR		hendrix.csl
+
+hermit.csl		IN  A		198.38.18.13
+hermit			IN  CNAME	hermit.csl
+13.18.38.198.ip4	IN  PTR		hermit.csl
+
+heartofgold.csl		IN  A		198.38.18.14
+heartofgold		IN  CNAME	heartofgold.csl
+14.18.38.198.ip4	IN  PTR		heartofgold.csl
+
+kinglear.csl		IN  A		198.38.18.15
+kinglear		IN  CNAME	kinglear.csl
+15.18.38.198.ip4	IN  PTR		kinglear.csl
+
+kreisler.csl		IN  A		198.38.18.16
+kreisler		IN  CNAME	kreisler.csl
+16.18.38.198.ip4	IN  PTR		kreisler.csl
+
+lespaul.csl		IN  A		198.38.18.17
+lespaul			IN  CNAME	lespaul.csl
+17.18.38.198.ip4	IN  PTR		lespaul.csl
+
+lordjim.csl		IN  A		198.38.18.18
+lordjim			IN  CNAME	lordjim.csl
+18.18.38.198.ip4	IN  PTR		lordjim.csl
+
+macbeth.csl		IN  A		198.38.18.19
+macbeth			IN  CNAME	macbeth.csl
+19.18.38.198.ip4	IN  PTR		macbeth.csl
+
+odysseus.csl		IN  A		198.38.18.20
+odysseus		IN  CNAME	odysseus.csl
+20.18.38.198.ip4	IN  PTR		odysseus.csl
+
+oedipus.csl		IN  A		198.38.18.21
+oedipus			IN  CNAME	oedipus.csl
+21.18.38.198.ip4	IN  PTR		oedipus.csl
+
+okonokwo.csl		IN  A		198.38.18.22
+okonokwo		IN  CNAME	okonokwo.csl
+22.18.38.198.ip4	IN  PTR		okonokwo.csl
+
+othello.csl		IN  A		198.38.18.23
+othello			IN  CNAME	othello.csl
+23.18.38.198.ip4	IN  PTR		othello.csl
+
+proctor.csl		IN  A		198.38.18.24
+proctor			IN  CNAME	proctor.csl
+24.18.38.198.ip4	IN  PTR		proctor.csl
+
+santana.csl		IN  A		198.38.18.25
+santana			IN  CNAME	santana.csl
+25.18.38.198.ip4	IN  PTR		santana.csl
+
+tess.csl		IN  A		198.38.18.26
+tess			IN  CNAME	tess.csl
+26.18.38.198.ip4	IN  PTR		tess.csl
+
+santiago.csl		IN  A		198.38.18.27
+santiago		IN  CNAME	santiago.csl
+27.18.38.198.ip4	IN  PTR		santiago.csl
+
+vanhalen.csl		IN  A		198.38.18.28
+vanhalen		IN  CNAME	vanhalen.csl
+28.18.38.198.ip4	IN  PTR		vanhalen.csl
+
+zappa.csl		IN  A		198.38.18.29
+zappa			IN  CNAME	zappa.csl
+29.18.38.198.ip4	IN  PTR		zappa.csl
+
+
+
+; Volcanoes --jwelsh
+
+bulusan.csl		IN  A		198.38.18.51
+bulusan			IN  CNAME	bulusan.csl
+51.18.38.198.ip4	IN  PTR		bulusan.csl
+
+cotopaxi.csl		IN  A		198.38.18.52
+cotopaxi		IN  CNAME	cotopaxi.csl
+52.18.38.198.ip4	IN  PTR		cotopaxi.csl
+
+etna.csl		IN  A		198.38.18.53
+etna			IN  CNAME	etna.csl
+53.18.38.198.ip4	IN  PTR		etna.csl
+
+helens.csl		IN  A		198.38.18.54
+helens			IN  CNAME	helens.csl
+54.18.38.198.ip4	IN  PTR		helens.csl
+
+katla.csl		IN  A		198.38.18.55
+katla			IN  CNAME	katla.csl
+55.18.38.198.ip4	IN  PTR		katla.csl
+
+kilauea.csl		IN  A		198.38.18.56
+kilauea			IN  CNAME	kilauea.csl
+56.18.38.198.ip4	IN  PTR		kilauea.csl
+
+krakatoa.csl		IN  A		198.38.18.57
+krakatoa		IN  CNAME	krakatoa.csl
+57.18.38.198.ip4	IN  PTR		krakatoa.csl
+
+narugo.csl		IN  A		198.38.18.58
+narugo			IN  CNAME	narugo.csl
+58.18.38.198.ip4	IN  PTR		narugo.csl
+
+pelee.csl		IN  A		198.38.18.59
+pelee			IN  CNAME	pelee.csl
+59.18.38.198.ip4	IN  PTR		pelee.csl
+
+rainier.csl		IN  A		198.38.18.60
+rainier			IN  CNAME	rainier.csl
+60.18.38.198.ip4	IN  PTR		rainier.csl
+
+sakurajima.csl		IN  A		198.38.18.61
+sakurajima		IN  CNAME	sakurajima.csl
+61.18.38.198.ip4	IN  PTR		sakurajima.csl
+
+semeru.csl		IN  A		198.38.18.62
+semeru			IN  CNAME	semeru.csl
+62.18.38.198.ip4	IN  PTR		semeru.csl
+
+sundoro.csl		IN  A		198.38.18.63
+sundoro			IN  CNAME	sundoro.csl
+63.18.38.198.ip4	IN  PTR		sundoro.csl
+
+tambora.csl		IN  A		198.38.18.64
+tambora			IN  CNAME	tambora.csl
+64.18.38.198.ip4	IN  PTR		tambora.csl
+
+tobaru.csl		IN  A		198.38.18.65
+tobaru			IN  CNAME	tobaru.csl
+65.18.38.198.ip4	IN  PTR		tobaru.csl
+
+vesuvius.csl		IN  A		198.38.18.66
+vesuvius		IN  CNAME	vesuvius.csl
+66.18.38.198.ip4	IN  PTR		vesuvius.csl
+
+westdahl.csl		IN  A		198.38.18.67
+westdahl		IN  CNAME	westdahl.csl
+67.18.38.198.ip4	IN  PTR		westdahl.csl
+
+dukono.csl		IN  A		198.38.18.70
+dukono			IN  CNAME	dukono.csl
+70.18.38.198.ip4	IN  PTR		dukono.csl
+
+; AIs
+andross.csl		IN  A		198.38.18.77
+one			IN  CNAME	andross.csl
+77.18.38.198.ip4	IN  PTR		andross.csl
+
+cortana.csl		IN  A		198.38.18.78
+cortana			IN  CNAME	cortana.csl
+78.18.38.198.ip4	IN  PTR		cortana.csl
+
+durandal.csl		IN  A		198.38.18.79
+durandal		IN  CNAME	durandal.csl
+79.18.38.198.ip4	IN  PTR		durandal.csl
+
+engine.csl		IN  A		198.38.18.80
+engine			IN  CNAME	engine.csl
+80.18.38.198.ip4	IN  PTR		engine.csl
+
+glados.csl		IN  A		198.38.18.81
+glados			IN  CNAME	glados.csl
+81.18.38.198.ip4	IN  PTR		glados.csl
+
+hal.csl			IN  A		198.38.18.82
+hal			IN  CNAME	hal.csl
+82.18.38.198.ip4	IN  PTR		hal.csl
+
+heinrich.csl		IN  A		198.38.18.83
+heinrich		IN  CNAME	heinrich.csl
+83.18.38.198.ip4	IN  PTR		heinrich.csl
+
+hex.csl			IN  A		198.38.18.84
+hex			IN  CNAME	hex.csl
+84.18.38.198.ip4	IN  PTR		hex.csl
+
+leela.csl		IN  A		198.38.18.85
+leela			IN  CNAME	leela.csl
+85.18.38.198.ip4	IN  PTR		leela.csl
+
+logris.csl		IN  A		198.38.18.86
+logris			IN  CNAME	logris.csl
+86.18.38.198.ip4	IN  PTR		logris.csl
+
+neuromancer.csl		IN  A		198.38.18.87
+neuromancer		IN  CNAME	neuromancer.csl
+neuro			IN  CNAME	neuromancer.csl
+87.18.38.198.ip4	IN  PTR		neuromancer.csl
+
+skynet.csl		IN  A		198.38.18.88
+skynet			IN  CNAME	skynet.csl
+88.18.38.198.ip4	IN  PTR		skynet.csl
+
+vger.csl		IN  A		198.38.18.89
+vger			IN  CNAME	vger.csl
+89.18.38.198.ip4	IN  PTR		vger.csl
+
+wintermute.csl		IN  A		198.38.18.90
+wintermute		IN  CNAME	wintermute.csl
+90.18.38.198.ip4	IN  PTR		wintermute.csl
+
+wopr.csl		IN  A		198.38.18.91
+wopr			IN  CNAME	wopr.csl
+91.18.38.198.ip4	IN  PTR		wopr.csl
+
+xerxes.csl		IN  A		198.38.18.92
+xerxes			IN  CNAME	xerxes.csl
+92.18.38.198.ip4	IN  PTR		xerxes.csl
+
+
+; SciFi Authors
+
+adams.csl		IN  A		198.38.18.95
+adams			IN  CNAME	adams.csl
+95.18.38.198.ip4	IN  PTR		adams.csl
+
+asimov.csl		IN  A		198.38.18.96
+asimov			IN  CNAME	asimov.csl
+96.18.38.198.ip4	IN  PTR		asimov.csl
+
+bradbury.csl		IN  A		198.38.18.97
+bradbury		IN  CNAME	bradbury.csl
+97.18.38.198.ip4	IN  PTR		bradbury.csl
+
+card.csl		IN  A		198.38.18.98
+card			IN  CNAME	card.csl
+98.18.38.198.ip4	IN  PTR		card.csl
+
+clarke.csl		IN  A		198.38.18.99
+clarke			IN  CNAME	clarke.csl
+99.18.38.198.ip4	IN  PTR		clarke.csl
+
+gibson.csl		IN  A		198.38.18.100
+gibson			IN  CNAME	gibson.csl
+100.18.38.198.ip4	IN  PTR		gibson.csl
+
+heinlein.csl		IN  A		198.38.18.101
+heinlein		IN  CNAME	heinlein.csl
+101.18.38.198.ip4	IN  PTR		heinlein.csl
+
+herbert.csl		IN  A		198.38.18.102
+herbert			IN  CNAME	herbert.csl
+102.18.38.198.ip4	IN  PTR		herbert.csl
+
+orwell.csl		IN  A		198.38.18.103
+orwell			IN  CNAME	orwell.csl
+103.18.38.198.ip4	IN  PTR		orwell.csl
+
+pratchett.csl		IN  A		198.38.18.104
+pratchett		IN  CNAME	pratchett.csl
+104.18.38.198.ip4	IN  PTR		pratchett.csl
+
+sagan.csl		IN  A		198.38.18.105
+sagan			IN  CNAME	sagan.csl
+105.18.38.198.ip4	IN  PTR		sagan.csl
+
+stephenson.csl		IN  A		198.38.18.106
+stephenson		IN  CNAME	stephenson.csl
+106.18.38.198.ip4	IN  PTR		stephenson.csl
+
+verne.csl		IN  A		198.38.18.107
+verne			IN  CNAME	verne.csl
+107.18.38.198.ip4	IN  PTR		verne.csl
+
+vonnegut.csl		IN  A		198.38.18.108
+vonnegut		IN  CNAME	vonnegut.csl
+108.18.38.198.ip4	IN  PTR		vonnegut.csl
+
+wells.csl		IN  A		198.38.18.109
+wells			IN  CNAME	wells.csl
+109.18.38.198.ip4	IN  PTR		wells.csl
+
+zindell.csl		IN  A		198.38.18.111
+zindell			IN  CNAME	zindell.csl
+111.18.38.198.ip4	IN  PTR		zindell.csl
+
+russell.csl		IN  A		198.38.18.113
+russell			IN  CNAME	russell.csl
+113.18.38.198.ip4	IN  PTR		russell.csl
+
+; More workstations or similar objects
+
+shodan.csl		IN  A		198.38.18.72
+72.18.38.198.ip4	IN  PTR		shodan.csl
+
+meson.csl		IN  A		198.38.18.73
+meson			IN  CNAME	meson.csl
+73.18.38.198.ip4	IN  PTR		meson.csl
+
+baryon.csl		IN  A		198.38.18.74
+baryon			IN  CNAME	baryon.csl
+74.18.38.198.ip4	IN  PTR		baryon.csl
+
+boson.csl		IN  A		198.38.18.75
+boson			IN  CNAME	boson.csl
+75.18.38.198.ip4	IN  PTR		boson.csl
+
+
+!!These workstations have been decommissioned and are no longer around
+page.csl		IN	A		198.38.18.30
+page			IN	CNAME	page.csl
+30.18.38.198.ip4	IN	PTR		page.csl
+
+clapton.csl		IN	A		198.38.18.31
+clapton			IN	CNAME	clapton.csl
+31.18.38.198.ip4	IN	PTR		clapton.csl
+
+jett.csl		IN	A		198.38.18.32
+jett			IN	CNAME	jett.csl
+32.18.38.198.ip4	IN	PTR		jett.csl
+
+friel.csl         	IN A  198.38.18.33
+friel             	IN CNAME friel.csl
+33.18.38.198.ip4  	IN PTR   friel.csl
+
+;; 198.38.18.34			- David
+anotherchance.csl	IN	A   198.38.18.34
+anotherchance		IN  CNAME	anotherchance.csl
+34.18.38.198.ip4	IN	PTR anotherchance.csl
+
+loman.csl		IN	A	198.38.18.35
+loman			IN	CNAME loman.csl
+35.18.38.198.ip4	IN	PTR	loman.csl
+
+;; 198.38.18.36			HAPPY Windows Server 2003
+faustus.cslwin		IN	A	198.38.18.36
+faustus.csl		IN	CNAME	faustus.cslwin
+faustus			IN	CNAME	faustus.cslwin
+36.18.38.198.ip4	IN	PTR	faustus.cslwin
+
+!!techno.csl		IN	A	198.38.18.37
+!!techno			IN	CNAME	techno.csl
+!!37.18.38.198.ip4	IN	PTR	techno.csl
+!!
+!!library.csl		IN	A	198.38.18.38
+!!library			IN	CNAME	library.csl
+!!38.18.38.198.ip4	IN	PTR	library.csl
+
+??; hamradio shack workstation
+??Is this used/around?
+??hambox.csl		IN 	A	198.38.18.39
+??hambox			IN 	CNAME	hambox.csl
+??39.18.38.198.ip4	IN 	PTR	hambox.csl ; reverse, reverse!
+
+; Barnett Trzcinski	 - btrzcins [2007] 198.38.18.40
+mobilescreamer.csl	IN	A	198.38.18.40
+mobilescreamer		IN	CNAME	mobilescreamer.csl
+40.18.38.198.ip4	IN	PTR	mobilescreamer.csl
+
+; Andy Street 		 - astreet [2007] 198.38.18.41
+andytop.csl		IN	A	198.38.18.41
+andytop			IN	CNAME	andytop.csl
+41.18.38.198.ip4	IN	PTR	andytop.csl
+
+; Brian Wu			 - bwu [2007] 198.38.18.42
+bwu.csl			IN	A	198.38.18.42
+bwu			IN	CNAME	bwu.csl
+42.18.38.198.ip4	IN	PTR	bwu.csl
+ion.csl			IN	A	198.38.18.43
+ion			IN	CNAME	ion.csl
+43.18.38.198.ip4	IN	PTR	ion.csl
+ibm.csl			IN	A	198.38.18.44
+ibm			IN	CNAME	ibm.csl
+44.18.38.198.ip4	IN	PTR	ibm.csl
+
+; NESA Blackboard	- mlowman	198.38.18.45
+nesasandbox		IN	A	198.38.23.248
+snap			IN	CNAME	nesasandbox
+248.23.38.198.ip4	IN	PTR	nesasandbox
+
+; Tasha's laptop
+tashatop.csl		IN	A	198.38.18.46
+tashatop		IN	CNAME	tashatop.csl
+46.18.38.198.ip4	IN	PTR	tashatop.csl
+
+; Michael Lowman
+mlowman.csl		IN	A	198.38.18.47
+mlowman			IN	CNAME	mlowman.csl
+47.18.38.198.ip4	IN	PTR	mlowman.csl
+
+; Jamie's Laptop
+jamietop.csl    	IN  A   198.38.18.48
+jamietop    		IN  CNAME   jamietop.csl
+48.18.38.198.ip4    	IN  PTR jamietop.csl
+
+; Stebby's Laptop
+stebbytop.csl		IN  A	198.38.18.49
+stebbytop		IN	CNAME	stebbytop.csl
+49.18.38.198.ip4	IN	PTR	stebbytop.csl
+
+; Jacob's Laptop
+jwelsh-laptop.csl	IN  A   198.38.18.50
+jwelsh-laptop		IN  CNAME   jwelsh-laptop.csl
+50.18.38.198.ip4	IN  PTR jwelsh-laptop.csl
+
+; mgreen's Laptop
+mgreentop.csl		IN  A	198.38.18.68
+mgreentop		IN  CNAME	mgreentop.csl
+68.18.38.198.ip4    	IN  PTR	mgreentop.csl
+
+; Mkremer's Laptop
+mkremerwork.csl		IN	A	198.38.18.112
+mkremerwork		IN	CNAME	mkremerwork.csl
+112.18.38.198		IN	PTR	mkremerwork.csl
+
+; wyang's laptop
+weyang-tpt61.sun	IN	A	198.38.18.110
+weyang-tpt61		IN	CNAME	weyang-tpt61.sun
+110.18.38.198.ip4	IN	PTR	weyang-tpt61.sun
+
+; fsufitch's laptop
+fsufitch.csl		IN	A 	198.38.18.112
+fsufitch		IN	CNAME	fsufitch.csl
+112.18.38.198.ip4	IN	PTR	fsufitch.csl
+
+; Systems engineering (room 119) computers
+; contact mgreen
+
+tj3sat.csl		IN  A  198.38.18.69
+tj3sat			IN  CNAME  tj3sat.csl
+69.18.38.198.ip4	IN PTR    tj3sat.csl
+
+!!are these around?
+!!octocam.csl		IN	A	198.38.18.71
+!!octocam			IN	CNAME	198.38.18.71
+!!71.18.38.198.ip4	IN	PTR	octocam.csl
+!!
+!!; Robotics (room over in freshman tech hall) computer
+!!selene.csl		IN 	A	198.38.18.93
+!!selene			IN	CNAME	selene.csl
+!!93.18.38.198.ip4	IN	PTR	selene.csl
+
+; Lee Burton (lburton) laptop (hitodama toshiba running solaris/linux)
+; should not be a .csl, leave it be ;) :)
+hitodama		IN	A	198.38.18.94
+hitodama.csl		IN	CNAME	hitodama
+94.18.38.198.ip4	IN	PTR	hitodama
+
+;;;
+;; 198.38.19.[1-100] - dev machines
+;;;
+
+!!web.test.csl		IN	A		198.38.19.3
+!!3.19.38.198.ip4		IN	PTR		web.test.csl
+
+web2.csl		IN	A		198.38.19.4
+4.19.38.198.ip4		IN	PTR		web2.csl
+
+??www.test.csl		IN	CNAME	web.test.csl
+??2006.test.csl		IN	CNAME	web.test.csl
+??2007.test.csl		IN	CNAME	web.test.csl
+??2008.test.csl		IN	CNAME	web.test.csl
+??2009.test.csl		IN	CNAME	web.test.csl
+??2010.test.csl		IN	CNAME	web.test.csl
+??information.test.csl	IN	CNAME	web.test.csl
+??portfolios.test.csl	IN	CNAME	web.test.csl
+??academics.test.csl	IN	CNAME	web.test.csl
+??sct.test.csl		IN	CNAME	web.test.csl
+??leadership.test.csl	IN	CNAME	web.test.csl
+??publications.test.csl	IN	CNAME	web.test.csl
+??activities.test.csl	IN	CNAME	web.test.csl
+??sports.test.csl		IN	CNAME	web.test.csl
+??arts.test.csl		IN	CNAME	web.test.csl
+??portal.test.csl		IN	CNAME	web.test.csl
+??media.test.csl		IN	CNAME	web.test.csl
+??users.test.csl		IN	CNAME	web.test.csl
+??unix.test.csl		IN	CNAME	web.test.csl
+??teachers.test.csl	IN	CNAME	web.test.csl
+??webdav.test.csl		IN	CNAME	web.test.csl
+??phpmyadmin.test.csl	IN	CNAME	web.test.csl
+??kbase.test.csl		IN	CNAME	web.test.csl
+??help.test.csl		IN	CNAME	web.test.csl
+??craydoc.test.csl	IN	CNAME	web.test.csl
+??craybatch.test.csl	IN	CNAME	web.test.csl
+??oldsite.test.csl	IN	CNAME	web.test.csl
+??www.leadership.test.csl	IN	CNAME	web.test.csl
+??jtrader.test.csl	IN	CNAME	web.test.csl
+??newestsite.test.csl	IN	CNAME	web.test.csl
+
+!!moonray.csl		IN	A	198.38.19.10
+!!moonray			IN	CNAME moonray.csl
+!!10.19.38.198.ip4	IN	PTR	moonray.csl
+
+!!proxy-ng.csl		IN	A	198.38.19.13
+!!proxy-ng		IN	CNAME	proxy-ng.csl
+!!13.19.38.198		IN	PTR	proxy.csl
+
+; LEAVING
+;maxwell.csl		IN	A		198.38.19.14
+;maxwell			IN	CNAME		maxwell.csl
+;14.19.38.198.ip4	IN	PTR		maxwell.csl
+
+; iodine - intranet testboxes
+admin-i2.dev.csl	IN	A		198.38.19.50
+50.19.38.198.ip4	IN	PTR		admin-i2.dev
+mbkremer-i2.dev.csl     IN      A               198.38.19.51
+51.19.38.198.ip4        IN      PTR             mbkremer-i2.dev.csl
+jcboning-i2.dev.csl     IN      A               198.38.19.52
+52.19.38.198.ip4        IN      PTR             jcboning-i2.dev.csl
+jtcranmer-i2.dev.csl    IN      A               198.38.19.53
+53.19.38.198.ip4        IN      PTR             jtcranmer-i2.dev.csl
+bthood-i2.dev.csl       IN      A               198.38.19.54
+54.19.38.198.ip4        IN      PTR             bthood-i2.dev.csl
+
+??tjalum			IN	A		198.38.19.7
+??7.19.38.198.ip4		IN	PTR		tjalum
+
+cslwin02.cslwin		IN	A		198.38.19.2
+2.19.38.198.ip4		IN	PTR		cslwin02.cslwin
+
+;;;
+;; 198.38.19.[101-254] - RESERVED for VDI VMs
+;;;
+
+;; currently entires for this range are managed directly in DHCP
+
+
+; MAC Cluster
+einstein.csl		IN	A	198.38.20.1
+einstein		IN	CNAME	einstein.csl
+cluster			IN	CNAME	einstein.csl
+cluster.csl		IN	CNAME	einstein.csl
+1.20.38.198.ip4		IN	PTR	einstein.csl
+
+orange.csl		IN	A	198.38.20.2
+orange			IN	CNAME orange.csl
+2.20.38.198.ip4		IN	PTR	orange.csl
+
+pear.csl		IN	A	198.38.20.3
+pear			IN	CNAME pear.csl
+3.20.38.198.ip4		IN	PTR	pear.csl
+
+kiwi.csl		IN	A	198.38.20.4
+kiwi			IN	CNAME kiwi.csl
+4.20.38.198.ip4		IN	PTR	kiwi.csl
+
+peach.csl		IN	A	198.38.20.5
+peach			IN	CNAME peach.csl
+5.20.38.198.ip4		IN	PTR	peach.csl
+
+mango.csl		IN	A	198.38.20.6
+mango			IN	CNAME mango.csl
+6.20.38.198.ip4		IN	PTR	mango.csl
+
+cherry.csl		IN	A	198.38.20.7
+cherry			IN	CNAME cherry.csl
+7.20.38.198.ip4		IN	PTR	cherry.csl
+
+lemon.csl		IN	A	198.38.20.8
+lemon			IN	CNAME lemon.csl
+8.20.38.198.ip4		IN	PTR	lemon.csl
+
+lime.csl		IN	A	198.38.20.9
+lime			IN	CNAME lime.csl
+9.20.38.198.ip4		IN	PTR	lime.csl
+
+
+
+asm.csl         	IN      A 198.38.20.10
+asm                     IN      CNAME   asm.csl
+10.20.38.198.ip4        IN      PTR     asm.csl
+
+basic.csl               IN      A 198.38.20.11
+basic                   IN      CNAME   basic.csl
+11.20.38.198.ip4        IN      PTR     basic.csl
+
+c.csl           	IN      A 198.38.20.12
+c                       IN      CNAME   c.csl
+12.20.38.198.ip4        IN      PTR     c.csl
+
+cpp.csl           	IN      A 198.38.20.13
+cpp               	IN      CNAME   cpp.csl
+13.20.38.198.ip4        IN      PTR     cpp.csl
+
+fortran.csl             IN      A 198.38.20.14
+fortran                 IN      CNAME   fortran.csl
+14.20.38.198.ip4        IN      PTR     fortran.csl
+
+haskell.csl             IN      A 198.38.20.15
+haskell                 IN      CNAME   haskell.csl
+15.20.38.198.ip4        IN      PTR     haskell.csl
+
+java.csl                IN      A 198.38.20.16
+java                    IN      CNAME   java.csl
+16.20.38.198.ip4        IN      PTR     java.csl
+
+lisp.csl                IN      A 198.38.20.17
+lisp                    IN      CNAME   lisp.csl
+17.20.38.198.ip4        IN      PTR     lisp.csl
+
+ml.csl          	IN      A 198.38.20.18
+ml                      IN      CNAME   ml.csl
+18.20.38.198.ip4        IN      PTR     ml.csl
+
+pascal.csl              IN      A 198.38.20.19
+pascal                  IN      CNAME   pascal.csl
+19.20.38.198.ip4        IN      PTR     pascal.csl
+
+perl.csl                IN      A 198.38.20.20
+perl                    IN      CNAME   perl.csl
+20.20.38.198.ip4        IN      PTR     perl.csl
+
+php.csl         	IN      A 198.38.20.21
+php                     IN      CNAME   php.csl
+21.20.38.198.ip4        IN      PTR     php.csl
+
+prolog.csl              IN      A 198.38.20.22
+prolog                  IN      CNAME   prolog.csl
+22.20.38.198.ip4        IN      PTR     prolog.csl
+
+python.csl              IN      A 198.38.20.23
+python                  IN      CNAME   python.csl
+23.20.38.198.ip4        IN      PTR     python.csl
+
+ruby.csl                IN      A 198.38.20.24
+ruby                    IN      CNAME   ruby.csl
+24.20.38.198.ip4        IN      PTR     ruby.csl
+
+smalltalk.csl           IN      A 198.38.20.25
+smalltalk               IN      CNAME   smalltalk.csl
+25.20.38.198.ip4        IN      PTR     smalltalk.csl
+
+
+; Virtual School
+virtualschool		IN	A	216.200.111.218
+
+
+??;;;
+??;; 198.38.21.[1-255] - Sun Ray / LTSP
+??;;;
+
+!!These workstations are decommissioned
+hydrogen.csl		IN	A	198.38.21.1
+hydrogen			IN	CNAME	hydrogen.csl
+h					IN	CNAME	hydrogen.csl
+3.21.38.198.ip4		IN	PTR	hydrogen.csl
+
+helium.csl			IN	A	198.38.21.2
+helium				IN	CNAME	helium.csl
+he					IN	CNAME	helium.csl
+2.21.38.198.ip4		IN	PTR	helium.csl
+
+lithium.csl			IN	A	198.38.21.3
+lithium				IN	CNAME	lithium.csl
+li					IN	CNAME	lithium.csl
+3.21.38.198.ip4		IN	PTR	lithium.csl
+
+beryllium.csl		IN	A	198.38.21.4
+beryllium			IN	CNAME	beryllium.csl
+be					IN	CNAME	beryllium.csl
+4.21.38.198.ip4		IN	PTR	beryllium.csl
+
+carbon.csl			IN	A	198.38.21.6
+carbon				IN	CNAME	carbon.csl
+6.21.38.198.ip4		IN	PTR	carbon.csl
+
+neon.csl			IN	A	198.38.21.10
+neon				IN	CNAME	neon.csl
+ne					IN	CNAME	neon.csl
+10.21.38.198.ip4	IN	PTR	neon.csl
+
+magnesium.csl		IN	A	198.38.21.12
+magnesium			IN	CNAME	magnesium.csl
+mg					IN	CNAME	magnesium.csl
+12.21.38.198.ip4	IN	PTR	magenesium.csl
+
+phosphorus.csl		IN	A	198.38.21.15
+phosphorus			IN	CNAME	phosphorus.csl
+p					IN	CNAME	phosphorus.csl
+15.21.38.198.ip4	IN	PTR	phosphorus.csl
+
+sulfur.csl			IN	A	198.38.21.16
+sulfur				IN	CNAME	sulfur.csl
+s					IN	CNAME	sulfur.csl
+16.21.38.198.ip4	IN	PTR	sulfur.csl
+
+
+frenzy.csl			IN  A		198.38.21.17
+frenzy				IN  CNAME	frenzy.csl
+17.21.38.198.ip4	IN  PTR		frenzy.csl
+
+technicium.csl		IN  A		198.38.21.18
+technicium			IN  CNAME	technicium.csl
+18.21.38.198.ip4	IN  PTR		technicium.csl
+
+deuterium.csl		IN  A		198.38.21.19
+deuterium			IN  CNAME	deuterium.csl
+19.21.38.198.ip4	IN  PTR		deuterium.csl
+
+ws1337.csl			IN  A		198.38.21.20
+ws1337				IN  CNAME	ws1337.csl
+20.21.38.198.ip4	IN  PTR		ws1337.csl
+
+ltspnode1.csl		IN  A		198.38.21.21
+ltspnode1			IN  CNAME	ltspnode1.csl
+21.21.38.198.ip4	IN  PTR		ltspnode1.csl
+
+ltspnode2.csl		IN  A		198.38.21.22
+ltspnode2			IN  CNAME	ltspnode2.csl
+22.21.38.198.ip4	IN  PTR		ltspnode2.csl
+
+ltspnode3.csl		IN  A		198.38.21.23
+ltspnode3			IN  CNAME	ltspnode3.csl
+23.21.38.198.ip4	IN  PTR		ltspnode3.csl
+
+ltspnode4.csl		IN  A		198.38.21.24
+ltspnode4			IN  CNAME	ltspnode4.csl
+24.21.38.198.ip4	IN  PTR		ltspnode4.csl
+
+ltspnode5.csl		IN  A		198.38.21.25
+ltspnode5			IN  CNAME	ltspnode5.csl
+25.21.38.198.ip4	IN  PTR		ltspnode5.csl
+
+magrathea.csl		IN  A		198.38.21.26
+magrathea			IN  CNAME	magrathea.csl
+26.21.38.198.ip4	IN  PTR		magrathea.csl
+
+ltspnode7.csl		IN  A		198.38.21.27
+ltspnode7			IN  CNAME	ltspnode7.csl
+27.21.38.198.ip4	IN  PTR		ltspnode7.csl
+
+ltspnode8.csl		IN  A		198.38.21.28
+ltspnode8			IN  CNAME	ltspnode8.csl
+28.21.38.198.ip4	IN  PTR		ltspnode8.csl
+
+ltspnode9.csl		IN  A		198.38.21.29
+ltspnode9			IN  CNAME	ltspnode9.csl
+29.21.38.198.ip4	IN  PTR		ltspnode9.csl
+
+ltspnode10.csl		IN  A		198.38.21.30
+ltspnode10			IN  CNAME	ltspnode10.csl
+30.21.38.198.ip4	IN  PTR		ltspnode10.csl
+
+ltspnode11.csl		IN  A		198.38.21.31
+ltspnode11			IN  CNAME	ltspnode11.csl
+31.21.38.198.ip4	IN  PTR		ltspnode11.csl
+
+ltspnode12.csl		IN  A		198.38.21.32
+ltspnode12			IN  CNAME	ltspnode12.csl
+32.21.38.198.ip4	IN  PTR		ltspnode12.csl
+
+ltspnode13.csl		IN  A		198.38.21.33
+ltspnode13			IN  CNAME	ltspnode13.csl
+33.21.38.198.ip4	IN  PTR		ltspnode13.csl
+
+ltspnode14.csl		IN  A		198.38.21.34
+ltspnode14			IN  CNAME	ltspnode14.csl
+34.21.38.198.ip4	IN  PTR		ltspnode14.csl
+
+ltspnode15.csl		IN  A		198.38.21.35
+ltspnode15			IN  CNAME	ltspnode15.csl
+35.21.38.198.ip4	IN  PTR		ltspnode15.csl
+
+ltspnode16.csl		IN  A		198.38.21.36
+ltspnode16			IN  CNAME	ltspnode16.csl
+36.21.38.198.ip4	IN  PTR		ltspnode16.csl
+
+ltspnode17.csl		IN  A		198.38.21.37
+ltspnode17			IN  CNAME	ltspnode17.csl
+37.21.38.198.ip4	IN  PTR		ltspnode17.csl
+
+ltspnode18.csl		IN  A		198.38.21.38
+ltspnode18			IN  CNAME	ltspnode18.csl
+38.21.38.198.ip4	IN  PTR		ltspnode18.csl
+
+ltspnode19.csl		IN  A		198.38.21.39
+ltspnode19			IN  CNAME	ltspnode19.csl
+39.21.38.198.ip4	IN  PTR		ltspnode19.csl
+
+ltspnode20.csl		IN  A		198.38.21.40
+ltspnode20			IN  CNAME	ltspnode20.csl
+40.21.38.198.ip4	IN  PTR		ltspnode20.csl
+
+!!; Understudy boxes
+!!ensey.csl		IN  A		198.38.21.41
+!!41.21.38.198.ip4	IN  PTR		ensey.csl
+!!
+!!snowwhite.csl		IN  A		198.38.21.42
+!!42.21.38.198.ip4	IN  PTR		snowwhite.csl
+
+leeray0.sun		IN	A	198.38.21.100
+100.21.38.198.ip4   IN  PTR leeray0.sun
+leeray1.sun		IN	A	198.38.21.101
+101.21.38.198.ip4   IN  PTR leeray1.sun
+leeray2.sun		IN	A	198.38.21.102
+102.21.38.198.ip4   IN  PTR leeray2.sun
+ray03.sun		IN	A	198.38.21.103
+103.21.38.198.ip4	IN	PTR	ray03.sun
+leeray3.sun		IN	A	198.38.21.104
+104.21.38.198.ip4   IN  PTR leeray3.sun
+speakers		IN	A	198.38.21.105
+105.21.38.198.ip4	IN	PTR speakers
+ray05.sun		IN	A	198.38.21.106
+106.21.38.198.ip4	IN	PTR	ray05.sun
+ray02.sun		IN	A	198.38.21.107
+107.21.38.198.ip4	IN	PTR	ray02.sun
+ray150.sun		IN	A	198.38.21.108
+108.21.38.198.ip4	IN	PTR	ray150.sun
+ray29.sun		IN	A	198.38.21.129
+129.21.38.198.ip4	IN	PTR	ray29.sun
+ray31.sun		IN	A	198.38.21.131
+131.21.38.198.ip4	IN	PTR	ray31.sun
+ray32.sun		IN	A	198.38.21.132
+132.21.38.198.ip4	IN	PTR	ray32.sun
+rayrcw.sun		IN	A	198.38.21.133
+133.21.38.198.ip4	IN	PTR	rayrcw.sun
+ray23.sun		IN	A	198.38.21.134
+134.21.38.198.ip4	IN	PTR	ray23.sun
+ray-d01.sun		IN	A	198.38.21.135
+135.21.38.198.ip4	IN	PTR	ray-d01.sun
+ray-d02.sun		IN	A	198.38.21.140
+140.21.38.198.ip4	IN	PTR	ray-d02.sun
+ray-d10.sun		IN	A	198.38.21.141
+141.21.38.198.ip4	IN	PTR	ray-d10.sun
+ray-d11.sun		IN	A	198.38.21.142
+142.21.38.198.ip4	IN	PTR	ray-d11.sun
+ray-e07.sun		IN	A	198.38.21.143
+143.21.38.198.ip4	IN	PTR	ray-e07.sun
+ray-e08.sun		IN	A	198.38.21.144
+144.21.38.198.ip4	IN	PTR	ray-e08.sun
+ray-e09.sun		IN	A	198.38.21.145
+145.21.38.198.ip4	IN	PTR	ray-e09.sun
+ray-e10.sun		IN	A	198.38.21.136
+136.21.38.198.ip4	IN	PTR	ray-e10.sun
+ray-e13.sun		IN	A	198.38.21.137
+137.21.38.198.ip4	IN	PTR	ray-e13.sun
+ray-d20.sun		IN	A	198.38.21.138
+138.21.38.198.ip4	IN	PTR	ray-d20.sun
+ray-d24.sun		IN	A	198.38.21.139
+139.21.38.198.ip4	IN	PTR	ray-d24.sun
+robin.csl		IN	A	198.38.21.150
+150.21.38.198.ip4	IN	PTR robin.csl
+ray-c13.sun		IN	A	198.38.21.146
+146.21.38.198.ip4	IN	PTR	ray-c13.sun
+ray-c17.sun		IN	A	198.38.21.151
+151.21.38.198.ip4	IN	PTR	ray-c17.sun
+ray-e04.sun		IN	A	198.38.21.152
+152.21.38.198.ip4	IN	PTR	ray-e04.sun
+;;;
+;; 198.38.20.[51-99]	- MIPS Cluster
+;;;
+
+alpha.csl			IN	A		198.38.20.51
+alpha				IN	CNAME	alpha.csl
+51.20.38.198.ip4	IN	PTR		alpha.csl
+
+beta.csl			IN	A		198.38.20.52
+beta				IN	CNAME	beta.csl
+52.20.38.198.ip4	IN	PTR		beta.csl
+
+gamma.csl			IN	A		198.38.20.53
+gamma				IN	CNAME	gamma.csl
+53.20.38.198.ip4	IN	PTR		gamma.csl
+
+delta.csl			IN	A		198.38.20.54
+delta				IN	CNAME	delta.csl
+54.20.38.198.ip4	IN	PTR		delta.csl
+
+epsilon.csl			IN	A		198.38.20.55
+epsilon				IN	CNAME	epsilon.csl
+55.20.38.198.ip4	IN	PTR		epsilon.csl
+
+zeta.csl			IN	A		198.38.20.56
+zeta				IN	CNAME	zeta.csl
+56.20.38.198.ip4	IN	PTR		zeta.csl
+
+eta.csl				IN	A		198.38.20.57
+eta					IN	CNAME	eta.csl
+57.20.38.198.ip4	IN	PTR		eta.csl
+
+theta.csl			IN	A		198.38.20.58
+theta				IN	CNAME	theta.csl
+58.20.38.198.ip4	IN	PTR		theta.csl
+
+iota.csl			IN	A		198.38.20.59
+iota				IN	CNAME	iota.csl
+59.20.38.198.ip4	IN	PTR		iota.csl
+
+kappa.csl			IN	A		198.38.20.60
+kappa				IN	CNAME	kappa.csl
+60.20.38.198.ip4	IN	PTR		kappa.csl
+
+lambda.csl			IN	A		198.38.20.61
+lambda				IN	CNAME	lambda.csl
+61.20.38.198.ip4	IN	PTR		lambda.csl
+
+mu.csl				IN	A		198.38.20.62
+mu					IN	CNAME	mu.csl
+62.20.38.198.ip4	IN	PTR		mu.csl
+
+nu.csl				IN	A		198.38.20.63
+nu					IN	CNAME	nu.csl
+63.20.38.198.ip4	IN	PTR		nu.csl
+
+xi.csl				IN	A		198.38.20.64
+xi					IN	CNAME	xi.csl
+64.20.38.198.ip4	IN	PTR		xi.csl
+
+omicron.csl			IN	A		198.38.20.65
+omicron				IN	CNAME	omicron.csl
+65.20.38.198.ip4	IN	PTR		omicron.csl
+
+pi.csl				IN	A		198.38.20.66
+pi					IN	CNAME	pi.csl
+66.20.38.198.ip4	IN	PTR		pi.csl
+
+rho.csl				IN	A		198.38.20.67
+rho					IN	CNAME	rho.csl
+67.20.38.198.ip4	IN	PTR		rho.csl
+
+sigma.csl			IN	A		198.38.20.68
+sigma				IN	CNAME	sigma.csl
+68.20.38.198.ip4	IN	PTR		sigma.csl
+
+tau.csl				IN	A		198.38.20.69
+tau					IN	CNAME	tau.csl
+69.20.38.198.ip4	IN	PTR		tau.csl
+
+upsilon.csl			IN	A		198.38.20.70
+upsilon				IN	CNAME	upsilon.csl
+70.20.38.198.ip4	IN	PTR		upsilon.csl
+
+phi.csl				IN	A		198.38.20.71
+phi					IN	CNAME	phi.csl
+71.20.38.198.ip4	IN	PTR		phi.csl
+
+chi.csl				IN	A		198.38.20.72
+chi					IN	CNAME	chi.csl
+72.20.38.198.ip4	IN	PTR		chi.csl
+
+psi.csl				IN	A		198.38.20.73
+psi					IN	CNAME	psi.csl
+73.20.38.198.ip4	IN	PTR		psi.csl
+
+
+!!holmium-w.csl			IN	A		198.38.20.98
+!!holmium-w					IN	CNAME	holmium-w.csl
+!!98.20.38.198.ip4	IN	PTR		holmium-w.csl
+!!
+!!holmium.csl			IN	A		198.38.20.99
+!!holmium					IN	CNAME	holmium.csl
+!!99.20.38.198.ip4	IN	PTR		holmium.csl
+!!
+!!cadmium-w.csl			IN	A		198.38.20.97
+!!cadmium-w					IN	CNAME	cadmium-w.csl
+!!97.20.38.198.ip4	IN	PTR		cadmium-w.csl
+!!
+!!cadmium.csl			IN	A		198.38.20.96
+!!cadmium					IN	CNAME	cadmium.csl
+!!96.20.38.198.ip4	IN	PTR		cadmium.csl
+
+!!;;;
+!!;; 198.38.20.[100-199]	- MIPS Cluster
+!!;;;
+!!The following are Decommissioned
+
+
+ace.csl				IN	A		198.38.20.100
+ace					IN	CNAME	ace.csl
+100.20.38.198.ip4	IN	PTR	ace.csl
+
+
+bolt.csl				IN	A		198.38.20.101
+bolt					IN	CNAME	bolt.csl
+101.20.38.198.ip4	IN	PTR	bolt.csl
+
+
+dart.csl				IN	A		198.38.20.102
+dart					IN	CNAME	dart.csl
+102.20.38.198.ip4	IN	PTR	dart.csl
+
+
+tank.csl				IN	A		198.38.20.103
+tank					IN	CNAME	tank.csl
+103.20.38.198.ip4	IN	PTR	tank.csl
+
+
+loco.csl				IN	A		198.38.20.104
+loco					IN	CNAME	loco.csl
+104.20.38.198.ip4	IN	PTR	loco.csl
+
+
+turbo.csl			IN	A		198.38.20.105
+turbo					IN	CNAME	turbo.csl
+105.20.38.198.ip4	IN	PTR	turbo.csl
+
+
+crasher.csl			IN	A		198.38.20.106
+crasher				IN	CNAME	crasher.csl
+106.20.38.198.ip4	IN	PTR	crasher.csl
+
+
+blaster.csl			IN	A		198.38.20.107
+blaster				IN	CNAME	blaster.csl
+107.20.38.198.ip4	IN	PTR	blaster.csl
+
+
+tailpipe.csl		IN	A		198.38.20.108
+tailpipe				IN	CNAME	tailpipe.csl
+108.20.38.198.ip4	IN	PTR	tailpipe.csl
+
+
+sparky.csl			IN	A		198.38.20.109
+sparky				IN	CNAME	sparky.csl
+109.20.38.198.ip4	IN	PTR	sparky.csl
+
+
+treds.csl			IN	A		198.38.20.110
+treds					IN	CNAME	treds.csl
+110.20.38.198.ip4	IN	PTR	treds.csl
+
+
+hornet.csl			IN	A		198.38.20.111
+hornet				IN	CNAME	hornet.csl
+111.20.38.198.ip4	IN	PTR	hornet.csl
+
+
+heatseeker.csl		IN	A		198.38.20.112
+heatseeker			IN	CNAME	heatseeker.csl
+112.20.38.198.ip4	IN	PTR	heatseeker.csl
+
+
+vanguard.csl		IN	A		198.38.20.113
+vanguard				IN	CNAME	vanguard.csl
+113.20.38.198.ip4	IN	PTR	vanguard.csl
+
+
+vamp.csl				IN	A		198.38.20.114
+vamp					IN	CNAME	vamp.csl
+114.20.38.198.ip4	IN	PTR	vamp.csl
+
+
+scratch.csl			IN	A		198.38.20.115
+scratch				IN	CNAME	scratch.csl
+115.20.38.198.ip4	IN	PTR	scratch.csl
+
+
+flytrap.csl			IN	A		198.38.20.116
+flytrap 				IN	CNAME	flytrap.csl
+116.20.38.198.ip4	IN	PTR	flytrap.csl
+
+
+skyjack.csl			IN	A		198.38.20.117
+skyjack				IN	CNAME	skyjack.csl
+117.20.38.198.ip4	IN	PTR	skyjack.csl
+
+;;;
+;; 198.38.22.1-255 - VPN
+;;;
+
+; bvargo [2009]
+bvargo1			IN	CNAME		bvargo
+bvargo			IN	A		198.38.22.1
+1.22.38.198.ip4 	IN	PTR		bvargo
+bvargo2			IN	A		198.38.22.2
+2.22.38.198.ip4 	IN	PTR		bvargo2
+bvargo3			IN	A		198.38.22.3
+3.22.38.198.ip4 	IN	PTR		bvargo3
+bvargo4			IN	A		198.38.22.4
+4.22.38.198.ip4 	IN	PTR		bvargo4
+bvargo5			IN	A		198.38.22.5
+5.22.38.198.ip4 	IN	PTR		bvargo5
+
+srepetsk		IN	A		198.38.22.8
+8.22.38.198.ip4		IN	PTR		srepetsk
+
+mkremer-laptop.csl	IN	A		198.38.22.10
+mkremer-laptop		IN	CNAME		mkremer-laptop.csl
+10.22.38.198.ip4	IN	PTR		mkremer-laptop.csl
+
+mkremer			IN	A		198.38.22.15
+15.22.38.198.ip4	IN	PTR		mkremer
+
+lburton			IN	A		198.38.22.23
+23.22.38.198.ip4	IN	PTR		lburton
+
+wyang1			IN	CNAME		wyang
+wyang			IN	A		198.38.22.11
+11.22.38.198.ip4	IN	PTR		wyang
+
+ahamilto		IN	A		198.38.22.19
+19.22.38.198.ip4	IN	PTR		ahamilto
+
+ahamilto-laptop		IN	A		198.38.22.20
+20.22.38.198.ip4	IN	PTR		ahamilto-laptop
+
+reftop.csl		IN	A		198.38.22.21
+reftop			IN	CNAME		reftop.csl
+21.22.38.198.ip4	IN	PTR		reftop.csl
+
+wyang2			IN	A		198.38.22.16
+16.22.38.198.ip4	IN	PTR		wyang2
+
+!!;;;
+!!;; 198.38.23.[61-75]   - Printers
+!!;;;
+
+!!;chococat.csl        IN  A   198.38.23.61
+!!;chococat            IN  CNAME chococat.csl
+!!;61.23.38.198.ip4    IN  PTR chococat
+
+!!;pekkle.csl          IN  A   198.38.23.62
+!!;pekkle              IN  CNAME pekkle.csl
+!!;62.23.38.198.ip4    IN  PTR pekkle
+
+!!;thor.csl            IN  A   198.38.23.63
+!!;thor                IN  CNAME	thor.csl
+!!;63.23.38.198.ip4    IN  PTR thor
+
+;hellokitty.csl      IN  A   198.38.23.64
+hellokitty.csl		IN	CNAME hellokitty
+hellokitty          IN  A	198.38.17.203
+203.17.38.198.ip4	IN	PTR hellokitty
+!! second PTR;64.23.38.198.ip4    IN  PTR hellokitty
+
+!!;;;;;115_backup.csl		IN	CNAME 115_backup
+!!;;;;;115_backup		IN A	198.38.17.204
+!!;;;;;204.17.38.198.ip4	IN	PTR 115_backup                 
+!!;titan.csl       	IN  A   198.38.23.65
+!!;titan               IN  CNAME	titan.csl
+!!;65.23.38.198.ip4    IN  PTR titan
+
+!!;badtzmaru.csl       IN  A   198.38.23.66
+!!;badtzmaru           IN  CNAME	badtzmaru.csl
+!!;66.23.38.198.ip4    IN  PTR badtzmaru
+
+??Where does this go???
+??torbert.csl         IN  A   198.38.23.67
+??torbert             IN  CNAME	torbert.csl
+??67.23.38.198.ip4    IN  PTR torbert.csl
+
+;;;
+;; 198.38.23.[76-80]   - System Monitoring
+;;;
+
+monitor.csl		IN	A	198.38.23.76
+monitor			IN	CNAME	monitor.csl
+76.23.38.198.ip4	IN	PTR	monitor.csl
+
+wsmon.csl		IN	A	198.38.23.77
+wsmon			IN	CNAME	wsmon.csl
+77.23.38.198.ip4	IN	PTR	wsmon.csl
+
+??This would appear to be obseleted by Nagios/monitor
+??sun-monitor.sun		IN	A	198.38.23.78
+??sun-monitor		IN	CNAME	sun-monitor.sun
+??78.23.38.198.ip4	IN	PTR	sun-monitor.sun
+
+;Non-CSL
+;	What should go here:
+;		All lan related entries to DNS
+;
+244.23.38.198.ip4	IN	PTR mail.aosr.org.
+245.23.38.198.ip4	IN	PTR fermi.aosr.org.
+246.23.38.198.ip4	IN	PTR marconi.aosr.org.
+
+;local.border CNAME is currently here so NTLM auth in at least IE6 sends the right domain
+;--William Yang (wyang) 2009/01/22
+local.border	IN	CNAME		border ;??CNAMEs should NOT point to CNAMES
+border		IN	CNAME		zeus
+extranet	IN	A		151.188.13.160
+technology	IN	A		151.188.13.7
+backdoor	IN	CNAME		zeus
+bigbrother	IN	A		151.188.17.247
+proxy		IN	CNAME		bigbrother
+proxy1		IN	A		151.188.17.248
+proxy2		IN	A		10.64.161.247
+247.161.64.10	IN	PTR		proxy2
+
+zeus		IN	A		198.38.31.9
+9.31.38.198.ip4		IN	PTR zeus
+cs1		IN	A		151.188.13.67
+math		IN	A		151.188.13.199
+lan		IN	A		198.38.31.12	
+		IN	MX		1 franklin.tjhsst.edu.
+		IN	MX		2 mail-bkup.tjhsst.edu.
+12.31.38.198.ip4	IN 	PTR	lan
+oldlan		IN	A		198.38.31.12
+annex5390	IN	A		151.188.13.244
+annex		IN	CNAME		annex5390
+officeii	IN	A		151.188.13.1
+technet		IN	CNAME		zeus
+media-lj1	IN	A		151.188.13.181
+olympus		IN	A		151.188.14.2
+postman		IN	A		198.38.31.3	
+3.31.38.198.ip4	IN	PTR	postman
+calendar	IN	CNAME		postman
+manager		IN	A		151.188.17.250
+hera		IN	A		198.38.31.10
+10.31.38.198	IN	PTR	hera
+planetes	IN	A		198.38.31.5
+5.31.38.198	IN	PTR	planetes
+mathematica	IN	A		198.38.23.249
+249.23.38.198.ip4	IN	PTR	mathematica
+voicemail	IN	A	198.38.29.127
+rolmswitch	IN	A	198.38.30.127
+
+; fermi		IN	A	198.38.23.245
+; marconi		IN	A	198.38.23.246
+
+; removed the following as it was changed to E11 (see switches below)
+; rm122		IN	A		151.188.13.187
+
+video-broadcast		IN	A	198.38.29.74
+video-broadcast.lan	IN	CNAME	video-broadcast
+74.29.38.198.ip4	IN	PTR	video-broadcast
+
+video-broadcast-auditorium IN	A	198.38.29.73
+video-broadcast-auditorium.lan	IN	CNAME	video-broadcast-auditorium
+73.29.38.198.ip4	IN	PTR	video-broadcast-auditorium
+matrix			IN	A	198.38.31.15
+15.31.38.198		IN	PTR	matrix
+sanyo-back		IN	A	198.38.31.16
+16.31.38.198		IN	PTR	sanyo-back
+sanyo-front		IN	A	198.38.31.17
+17.31.38.198		IN	PTR	sanyo-front
+ip-camera-1		IN	A	198.38.31.200
+200.31.38.198		IN	PTR	ip-camera-1
+
+; -- TJHSST ACCESS POINTS FOR WIRELESS --
+
+AP101		IN		A	10.64.177.160
+AP102		IN		A	10.64.177.188
+AP103		IN		A	10.64.177.215
+ap104		IN		A	10.64.177.183
+AP105		IN		A	10.64.177.217
+AP106		IN		A	10.64.177.154
+AP107		IN		A	10.64.177.204
+AP108		IN		A	10.64.177.201
+AP110		IN		A	10.64.177.185
+AP111		IN		A	10.64.177.220
+AP112		IN		A	10.64.177.167
+AP114A		IN		A	10.64.177.147
+AP115		IN		A	10.64.177.213
+AP115C		IN		A	10.64.177.179
+AP116B		IN		A	10.64.177.207
+AP117		IN		A	10.64.177.211
+AP118		IN		A	10.64.177.205
+AP119		IN		A	10.64.177.221
+AP119A		IN		A	10.64.177.219
+AP120		IN		A	10.64.177.195
+AP123		IN		A	10.64.177.230
+AP124		IN		A	10.64.177.193
+AP125		IN		A	10.64.177.168
+AP127		IN		A	10.64.177.177
+AP127WK		IN		A	10.64.177.191
+AP128		IN		A	10.64.177.202
+AP130		IN		A	10.64.177.150
+AP131		IN		A	10.64.177.199
+AP133		IN		A	10.64.177.208
+AP134		IN		A	10.64.177.163
+AP135		IN		A	10.64.177.229
+AP136		IN		A	10.64.177.165
+AP141WK		IN		A	10.64.177.214
+AP143		IN		A	10.64.177.200
+AP145		IN		A	10.64.177.14
+AP146		IN		A	10.64.177.155
+AP147		IN		A	10.64.177.216
+AP150		IN		A	10.64.177.228
+AP151		IN		A	10.64.177.17
+AP201WK		IN		A	10.64.177.181
+AP203		IN		A	10.64.177.178
+AP205		IN		A	10.64.177.218
+AP206		IN		A	10.64.177.210
+AP208		IN		A	10.64.177.152
+AP210		IN		A	10.64.177.153
+AP212		IN		A	10.64.177.159
+AP214		IN		A	10.64.177.164
+AP217		IN		A	10.64.177.209
+AP219		IN		A	10.64.177.198
+AP220		IN		A	10.64.177.212
+AP222		IN		A	10.64.177.173
+AP223		IN		A	10.64.177.194
+AP226		IN		A	10.64.177.162
+AP146		IN		A	10.64.177.155
+AP147		IN		A	10.64.177.216
+AP150		IN		A	10.64.177.228
+AP201WK		IN		A	10.64.177.181
+AP203		IN		A	10.64.177.178
+AP205		IN		A	10.64.177.218
+AP206		IN		A	10.64.177.210
+AP208		IN		A	10.64.177.152
+AP210		IN		A	10.64.177.153
+AP212		IN		A	10.64.177.159
+AP214		IN		A	10.64.177.164
+AP217		IN		A	10.64.177.209
+AP219		IN		A	10.64.177.198
+AP143		IN		A		10.64.177.200
+AP146		IN		A	10.64.177.155
+AP147		IN		A	10.64.177.216
+AP150		IN		A	10.64.177.228
+AP201WK		IN		A	10.64.177.181
+AP203		IN		A	10.64.177.178
+AP205		IN		A	10.64.177.218
+AP206		IN		A	10.64.177.210
+AP208		IN		A	10.64.177.152
+AP210		IN		A	10.64.177.153
+AP212		IN		A	10.64.177.159
+AP214		IN		A	10.64.177.164
+AP217		IN		A	10.64.177.209
+AP219		IN		A	10.64.177.198
+AP220		IN		A	10.64.177.212
+AP222		IN		A	10.64.177.173
+AP223		IN		A	10.64.177.194
+AP226		IN		A	10.64.177.162
+AP227		IN		A	10.64.177.172
+AP230		IN		A	10.64.177.182
+AP231		IN		A	10.64.177.156
+AP232B		IN		A	10.64.177.206
+AP234WK		IN		A	10.64.177.184
+AP235		IN		A	10.64.177.157
+AP237		IN		A	10.64.177.192
+AP238		IN		A	10.64.177.170
+AP240		IN		A	10.64.177.197
+AP241		IN		A	10.64.177.171
+AP242B		IN		A	10.64.177.180
+APA10		IN		A	10.64.177.187
+APA18		IN		A	10.64.177.196
+APA4		IN		A	10.64.177.175
+APAUD		IN		A	10.64.177.186
+APAUD2		IN		A	10.64.177.146
+APCAFE		IN		A	10.64.177.151
+APCONF		IN		A	10.64.177.189
+APG1		IN		A	10.64.177.231
+APG10		IN		A	10.64.177.161
+APG3		IN		A	10.64.177.148
+APG5		IN		A	10.64.177.190
+APL4		IN		A	10.64.177.149
+APL7		IN		A	10.64.177.166
+APLIBRARY	IN		A	10.64.177.169
+APM12		IN		A	10.64.177.158
+APM4		IN		A	10.64.177.77
+APOFFICE	IN		A	10.64.177.176
+APSTAGE		IN		A	10.64.177.174
+
+; -- TJHSST Access Points for Trailers (updated 03-05-07)
+
+AP-T01	IN	A	10.64.177.29
+AP-T02	IN	A	10.64.177.30
+AP-T03	IN	A	10.64.177.31
+AP-T04	IN	A	10.64.177.28
+AP-T05	IN	A	10.64.177.24
+AP-T06	IN	A	10.64.177.26
+AP-T07	IN	A	10.64.177.25
+AP-T08	IN	A	10.64.177.27
+AP-T09	IN	A	10.64.177.6
+AP-T10	IN	A	10.64.177.7
+AP-T11	IN	A	10.64.177.8
+AP-T12	IN	A	10.64.177.9
+AP-T14	IN	A	10.64.177.11
+AP-T15	IN	A	10.64.177.10
+AP-T18	IN	A	10.64.177.15
+AP-T19	IN	A	10.64.177.12
+AP-T21	IN	A	10.64.177.13
+
+
+; TJHSST LAN SWITCHES (updated 9-14-06 for new switches)
+
+A01     IN      A       10.64.186.10
+A02     IN      A       10.64.186.11
+A03     IN      A       10.64.186.12
+A04     IN      A       10.64.186.13
+A05     IN      A       10.64.186.14
+A06     IN      A       10.64.186.15
+A07     IN      A       10.64.186.16
+A08     IN      A       10.64.186.17
+A09     IN      A       10.64.186.18
+A10     IN      A       10.64.186.19
+A11     IN      A       10.64.186.100
+AA01	IN	A	10.64.186.101
+AA02	IN	A	10.64.186.102
+AA03	IN	A	10.64.186.103
+B01     IN      A       10.64.186.20
+B02     IN      A       10.64.186.21
+B03     IN      A       10.64.186.22
+B04     IN      A       10.64.186.23
+B05     IN      A       10.64.186.24
+; B06 added 3-19-08 when hub was redone
+B06	IN	A	10.64.186.25
+C01     IN      A       10.64.186.30
+C02     IN      A       10.64.186.31
+C03     IN      A       10.64.186.32
+C04     IN      A       10.64.186.33
+C05     IN      A       10.64.186.34
+C06     IN      A       10.64.186.35
+C07     IN      A       10.64.186.36
+C08     IN      A       10.64.186.37
+D01     IN      A       10.64.186.40
+D02     IN      A       10.64.186.41
+D03     IN      A       10.64.186.42
+D04     IN      A       10.64.186.43
+D05     IN      A       10.64.186.44
+D06     IN      A       10.64.186.45
+D07     IN      A       10.64.186.46
+D08     IN      A       10.64.186.47
+D09     IN      A       10.64.186.48
+D10     IN      A       10.64.186.49
+E01     IN      A       10.64.186.50
+E02     IN      A       10.64.186.51
+E03     IN      A       10.64.186.52
+E04     IN      A       10.64.186.53
+E05     IN      A       10.64.186.54
+E06     IN      A       10.64.186.55
+E07     IN      A       10.64.186.56
+E08	IN	A	10.64.186.57
+E09     IN      A       10.64.186.58
+E10     IN      A       10.64.186.59
+E11     IN      A       10.64.186.151
+E13     IN      A       10.64.186.152
+E14     IN      A       10.64.186.153
+E15     IN      A       10.64.186.154
+E16     IN      A       10.64.186.155
+E17     IN      A       10.64.186.156
+E18	IN	A	10.64.186.95
+E19	IN	A	10.64.186.96
+E20	IN	A	10.64.186.97
+EE00	IN	A	151.188.13.224
+
+; the following switches have not been replaced as of 9-14-06
+; AA01            IN      A       151.188.13.171
+; AA02            IN      A       151.188.13.57
+;
+
+$GENERATE	1-254	198-38-24-$.lan		A	198.38.24.$
+$GENERATE	1-254	198-38-25-$.lan		A	198.38.25.$
+$GENERATE	1-254	198-38-26-$.lan		A	198.38.26.$
+$GENERATE	1-14	198-38-27-$.lan		A	198.38.27.$
+;local		IN	NS		tj02.local
+tj02		IN	CNAME		tj02.local
+tj03		IN	CNAME		tj02.local
+
+tj02.local	IN	A 		198.38.27.16
+shares		IN	CNAME	tj02.local
+local		IN	A		198.38.27.16
+;apollo.sun	IN	CNAME	apollo
+;apollo		IN	A		198.38.27.17
+
+moon-lan		IN	CNAME	moon-lan.sun
+moon-lan.sun		IN	A	198.38.27.18
+			;IN	AAAA	2001:468:cc0:1:214:4fff:feb0:b6cb
+18.27.38.198.ip4	IN	PTR	moon-lan.sun
+
+serial			IN	CNAME	serial.sun
+serial.sun		IN	A	198.38.27.19
+19.27.38.198.ip4	IN	PTR	serial.sun
+
+$GENERATE	20-254	198-38-27-$.lan		A	198.38.27.$
+$GENERATE	1-254	198-38-28-$.lan		A	198.38.28.$
+$GENERATE	1-73	198-38-29-$.lan		A	198.38.29.$
+198-38-29-74.lan			IN	CNAME	video-broadcast
+$GENERATE	75-254	198-38-29-$.lan		A	198.38.29.$
+$GENERATE	1-254	198-38-30-$.lan		A	198.38.30.$
+$GENERATE	1-254	198-38-31-$.lan		A	198.38.31.$
+
+
