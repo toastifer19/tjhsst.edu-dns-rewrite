@@ -502,20 +502,6 @@ ntp2.csl		IN	A	198.38.16.2
 ntp2			IN	CNAME ntp2.csl
 2.16.38.198.ip4		IN	PTR	ntp2.csl
 
-
-??How many NTP servers do we want/need?
-??ntp3.csl		IN	A	198.38.16.3
-??ntp3			IN	CNAME ntp3.csl
-??3.16.38.198.ip4		IN	PTR	ntp3.csl
-??
-??ntp4.csl		IN	A	198.38.16.4
-??ntp4			IN	CNAME ntp4.csl
-??4.16.38.198.ip4		IN	PTR	ntp4.csl
-??
-??ntp5.csl		IN	A	198.38.16.5
-??ntp5			IN	CNAME ntp5.csl
-??5.16.38.198.ip4		IN	PTR	ntp5.csl
-
 ??;cray - .6, .7 DO NOT ADD HERE!!!
 
 ;ldap - .8-.15
@@ -651,9 +637,6 @@ mysql.csl			IN  CNAME	mysql1.csl
 
 ??Clean up mysql IPs!! too much to comment
 ; MySQL cluster
-mysql-ndb1		IN	CNAME	magellanic.tjhsst.edu.
-mysql-ndb2		IN	CNAME	royal.tjhsst.edu.
-mysql-ndb3		IN	CNAME	emperor.tjhsst.edu.
 mysql1.csl			IN	A	198.38.16.60
 mysql1				IN	CNAME mysql1.csl
 60.16.38.198.ip4	IN	PTR	mysql1.csl
@@ -669,30 +652,6 @@ mysql3				IN	CNAME mysql3.csl
 mysql4.csl			IN	A	198.38.16.63
 mysql4				IN	CNAME mysql4.csl
 63.16.38.198.ip4	IN	PTR	mysql4.csl
-
-mysql5.csl			IN	A	198.38.16.64
-mysql5				IN	CNAME mysql5.csl
-64.16.38.198.ip4	IN	PTR	mysql5.csl
-
-mysql6.csl			IN	A	198.38.16.65
-mysql6				IN	CNAME mysql6.csl
-65.16.38.198.ip4	IN	PTR	mysql6.csl
-
-mysql7.csl			IN	A	198.38.16.66
-mysql7				IN	CNAME mysql7.csl
-66.16.38.198.ip4	IN	PTR	mysql7.csl
-
-mysql8.csl			IN	A	198.38.16.67
-mysql8				IN	CNAME mysql8.csl
-67.16.38.198.ip4	IN	PTR	mysql8.csl
-
-mysql9.csl			IN	A	198.38.16.68
-mysql9				IN	CNAME mysql9.csl
-68.16.38.198.ip4	IN	PTR	mysql9.csl
-
-mysql10.csl			IN	A	198.38.16.69
-mysql10				IN	CNAME mysql10.csl
-69.16.38.198.ip4	IN	PTR	mysql10.csl
 
 klaxon.sun		IN	A	198.38.16.70
 klaxon			IN	CNAME	klaxon.sun
@@ -750,11 +709,6 @@ web2			IN	CNAME	www
 ;web3			IN	CNAME	www	;sgodofsky
 ;web4			IN	CNAME	www	;dyllad
 
-??Not sure if this will be needed/used
-??www-lenny.csl		IN	A	198.38.16.49
-??www-lenny		IN	CNAME	www-lenny.csl
-??49.16.38.198.ip4	IN	PTR	www-lenny.csl
-
 fusion.csl		IN	A	198.38.16.53
 fusion			IN	CNAME	fusion.csl
 53.16.38.198.ip4	IN	PTR	fusion.csl
@@ -762,11 +716,6 @@ fusion			IN	CNAME	fusion.csl
 terra.csl		IN	A	198.38.16.54
 terra			IN	CNAME	terra.csl
 54.16.38.198.ip4	IN	PTR	terra.csl
-
-??I believe this VM has been decommisssioned to long-term backup
-??tap			IN	A	198.38.16.80
-??tjappublishings		IN	CNAME	tap
-??80.16.38.198.ip4	IN	PTR	tap
 
 ; Iodine .90-.99
 iodine			IN	A	198.38.16.90
@@ -779,10 +728,6 @@ intranet				IN	CNAME iodine.csl
 ??iodine2			IN	A	198.38.16.91
 ??iodine2.csl		IN	A	198.38.16.91
 ??91.16.38.198.ip4  IN PTR   iodine2
-
-??iodine-lenny		IN	A	198.38.16.92
-??iodine-lenny.csl	IN	CNAME	iodine-lenny
-??92.16.38.198.ip4	IN	PTR	iodine-lenny
 
 ; Weather .100-.101
 weather.csl			IN  A	198.38.16.100
