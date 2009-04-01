@@ -580,18 +580,19 @@ cups1				IN	CNAME cups1.csl
 26.16.38.198.ip4		IN	PTR	cups1.csl
 
 
-??These PTR records should move back with their respective servers or be removed if no longer used
-??;TOUCH THIS YOU DIE
-??27.16.38.198.ip4	IN	PTR	magellanic
-??;DEATH
-??;DO NOT EVER USE .28,.27,.29 EVER EVER EVER EVER EVEVER ** **** ***** ****
-??;YOU TOUCH THIS YOU WILL KILL THE LAB
-??; ^^ LAB DEATH SWITCHES
-??;TOUCH THIS YOU DIE
-??28.16.38.198.ip4	IN	PTR	royal
-??;TOUCH THIS YOU DIE
-??29.16.38.198.ip4	IN	PTR	fiordland
-??;DONT KILL THE LAB THANKS MUCH ^^
+; FIXME: These PTR records should move back with their respective servers or be removed if no longer used
+; test removing these after migrating in new config
+;TOUCH THIS YOU DIE
+27.16.38.198.ip4	IN	PTR	magellanic
+;DEATH
+;DO NOT EVER USE .28,.27,.29 EVER EVER EVER EVER EVEVER ** **** ***** ****
+;YOU TOUCH THIS YOU WILL KILL THE LAB
+; ^^ LAB DEATH SWITCHES
+;TOUCH THIS YOU DIE
+28.16.38.198.ip4	IN	PTR	royal
+;TOUCH THIS YOU DIE
+29.16.38.198.ip4	IN	PTR	fiordland
+;DONT KILL THE LAB THANKS MUCH ^^
 
 
 ; LTSP .30-39
