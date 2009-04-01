@@ -1061,6 +1061,7 @@ orwell			IN  CNAME	orwell.csl
 103.18.38.198.ip4	IN  PTR		orwell.csl
 
 pratchett.csl		IN  A		198.38.18.104
+			IN  AAAA	2001:468:cc0:0:21f:29ff:fef1:e120
 pratchett		IN  CNAME	pratchett.csl
 104.18.38.198.ip4	IN  PTR		pratchett.csl
 
