@@ -595,10 +595,6 @@ cups1				IN	CNAME cups1.csl
 
 
 ; LTSP .30-39
-??Should this be changed to point to ltsp2?
-??ltsp			IN  CNAME	ltsp1.csl
-??ltsp.csl		IN  CNAME	ltsp1.csl
-
 ltsp1.csl			IN	A	198.38.16.31
 ltsp1				IN	CNAME ltsp1.csl
 31.16.38.198.ip4	IN	PTR	ltsp1.csl
