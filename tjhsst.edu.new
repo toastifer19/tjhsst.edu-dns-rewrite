@@ -534,7 +534,7 @@ ldap2			IN	CNAME	ldap2.sun
 13.16.38.198.ip4	IN	PTR	ldap2.sun
 
 openldap.csl		IN	A	198.38.16.14
-??This should be enabled;			IN	AAAA	2001:468:cc0:0:214:4fff:fefb:8e7
+			IN	AAAA	2001:468:cc0:0:214:4fff:fefb:8e7
 openldap		IN	CNAME	openldap.csl
 14.16.38.198.ip4	IN	PTR	openldap.csl
 
